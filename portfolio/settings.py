@@ -1,29 +1,31 @@
+import ConfigParser
 import os
 
+SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
+config = ConfigParser.ConfigParser()
+initial_config_file_path = os.path.join(
+    SETTINGS_DIR, '..', 'configuration', 'settings', 'initial_settings.ini')
+if os.environ.get('IS_APP_ENGINE') == 'true':
+    local_config_file_path = os.path.join(
+        SETTINGS_DIR, '..', 'configuration', 'settings', 'gae_settings.ini')
+else:
+    local_config_file_path = os.path.join(
+        SETTINGS_DIR, '..', 'configuration', 'settings', 'local_settings.ini')
 
-# Django settings for portfolio project.
+config.read([initial_config_file_path, local_config_file_path])
 
-DEBUG = True
+DEBUG = config.getboolean('debug', 'django')
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('kien', 'kien@studiomohu.co'),
+    ('kien', 'kien@studiomohu.com'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'portfolio',                      # Or path to database file if using sqlite3.
-        'USER': 'portfolio',                      # Not used with sqlite3.
-        'PASSWORD': 'portfolio',                  # Not used with sqlite3.
-        'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
-    }
+    'default': dict(config._sections['db'])
 }
-
-SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -35,7 +37,7 @@ TIME_ZONE = 'Europe/London'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-uk'
 
-SITE_ID = 1
+SITE_ID = config.get('site', 'id')
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
