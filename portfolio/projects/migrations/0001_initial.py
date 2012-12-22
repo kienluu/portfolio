@@ -20,7 +20,7 @@ class Migration(SchemaMigration):
         db.create_table('projects_projectgroupinfo', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('project', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['projects.Project'])),
-            ('groups', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['projects.Group'])),
+            ('group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['projects.Group'])),
             ('position', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=0)),
         ))
         db.send_create_signal('projects', ['ProjectGroupInfo'])
@@ -61,7 +61,7 @@ class Migration(SchemaMigration):
         },
         'projects.projectgroupinfo': {
             'Meta': {'object_name': 'ProjectGroupInfo'},
-            'groups': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['projects.Group']"}),
+            'group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['projects.Group']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'position': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0'}),
             'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['projects.Project']"})
