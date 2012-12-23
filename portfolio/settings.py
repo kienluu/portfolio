@@ -1,8 +1,10 @@
-import ConfigParser
+from .utils import ConfigParser
 import os
 
 SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
-config = ConfigParser.ConfigParser()
+config = ConfigParser()
+# Enable case sensitive ini files
+config.optionxform = str
 initial_config_file_path = os.path.join(
     SETTINGS_DIR, '..', 'configuration', 'settings', 'initial_settings.ini')
 if os.environ.get('IS_APP_ENGINE') == 'true':
@@ -22,6 +24,16 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+#
+#DATABASES2 = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'HOST': '127.0.0.1',
+#        'USER': 'portfolio',
+#        'PASSWORD': 'portfolio',
+#        'NAME': 'portfolio'
+#    }
+#}
 
 DATABASES = {
     'default': dict(config._sections['db'])
@@ -128,6 +140,11 @@ INSTALLED_APPS = (
     'south',
     'portfolio.projects',
 )
+INSTALLED_APPS += tuple(config.getlist('installed_apps', 'append'))
+
+if config.get('storage', 'file_default'):
+    DEFAULT_FILE_STORAGE = config.get('storage', 'file_default')
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
