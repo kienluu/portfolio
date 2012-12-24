@@ -1,0 +1,3 @@
+[submodule "blobstore_storage"]
+	path = blobstore_storage
+	url = git@github.com:kienluu/blobstore_storage.git
