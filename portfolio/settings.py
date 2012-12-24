@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'portfolio.projects',
+    'blobstore_storage.testgae',
 )
 INSTALLED_APPS += tuple(config.getlist('installed_apps', 'append'))
 

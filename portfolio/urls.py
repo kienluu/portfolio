@@ -12,4 +12,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
+
+    url(r'^media/', include('blobstore_storage.urls')),
+#    url(r'^uploads/', include('gaeblob_storage.urls')),
 )
