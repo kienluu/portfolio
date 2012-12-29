@@ -43,6 +43,7 @@ require(
         'app/app'
     ],
     function($, _, Backbone, App) {
+        console.log('test');
         new App();
     }
 );
