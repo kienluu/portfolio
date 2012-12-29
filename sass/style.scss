@@ -29,7 +29,7 @@ header {
   }
 }
 
-div.nav {
+.nav-wrapper {
   position: absolute;
   text-align: center;
   width: 100%;
@@ -70,7 +70,7 @@ footer {
   @include span-columns(12);
 }
 
-.content {
+.content-wrapper {
   @include span-columns(9 omega, 12);
 }
 
@@ -83,7 +83,7 @@ footer {
   min-height: 100px;
 }
 
-.sidebar {
+.sidebar-wrapper {
   @include span-columns(3, 12);
   min-height: 600px;
   background-color: orange;

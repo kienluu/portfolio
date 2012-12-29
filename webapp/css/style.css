@@ -835,13 +835,13 @@ header .logo {
 }
 
 /* line 32, ../../sass/style.scss */
-div.nav {
+.nav-wrapper {
   position: absolute;
   text-align: center;
   width: 100%;
 }
 /* line 36, ../../sass/style.scss */
-div.nav table {
+.nav-wrapper table {
   width: 100%;
   border: 0;
   padding: 0;
@@ -915,7 +915,7 @@ footer {
 }
 
 /* line 73, ../../sass/style.scss */
-.content {
+.content-wrapper {
   width: 74.55357%;
   float: right;
   margin-right: 0;
@@ -941,7 +941,7 @@ footer {
 }
 
 /* line 86, ../../sass/style.scss */
-.sidebar {
+.sidebar-wrapper {
   width: 23.66071%;
   float: left;
   margin-right: 1.78571%;
