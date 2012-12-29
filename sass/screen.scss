@@ -1,0 +1,88 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "partials/_base";
+@import "susy";
+
+// Susy Settings
+// 960gs based 1140px grid
+$total-columns: 12;
+$column-width: 75px;
+$gutter-width: 20px;
+$grid-padding: 10px;
+
+$container-style: magic;
+
+/* -------------------------------------------------------------------------*/
+/* Layout */
+
+header {
+  @include span-columns(12);
+  position: relative;
+  background-color: #90ee90;
+
+  .logo {
+    float: left;
+    position: relative;
+  }
+}
+
+div.nav {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  table {
+    width: 100%;
+    border: 0;
+    padding: 0;
+  }
+}
+
+ul.nav-ul {
+  padding: 0;
+  margin: 0;
+  @include clearfix;
+  position: relative;
+  display: inline-block;
+  li {
+    float: left;
+    list-style-type: none;
+    list-style: none;
+  }
+}
+
+footer {
+  @include span-columns(12);
+  background-color: #90ee90;
+  text-align: center;
+}
+
+.container {
+  @include container;
+  @include susy-grid-background;
+  background-color: #add8e6;
+  min-height: 600px;
+}
+
+.main-section {
+  @include span-columns(12);
+}
+
+.content {
+  @include span-columns(9 omega, 12);
+}
+
+.grid {
+  @include span-columns(3, 9);
+  &:last-child {
+    @include omega;
+  }
+  background-color: orange;
+  min-height: 100px;
+}
+
+.sidebar {
+  @include span-columns(3, 12);
+  min-height: 600px;
+  background-color: orange;
+}
