@@ -31,6 +31,12 @@ require.config({
         backbone: {
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'
+        },
+        'backbone.relational': {
+            deps: ['backbone']
+        },
+        handlebars: {
+            exports: 'Handlebars'
         }
     }
 });
