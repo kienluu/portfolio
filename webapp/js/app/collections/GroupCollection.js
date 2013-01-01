@@ -7,8 +7,9 @@ define([
     'app/models/GroupModel'
 ], function ($, _, Backbone, HandleBars,
              BaseCollection, GroupModel) {
-    BaseCollection.extend({
+    var GroupCollection = BaseCollection.extend({
         model: GroupModel,
         resourceName: 'group'
     });
+    return GroupCollection;
 });

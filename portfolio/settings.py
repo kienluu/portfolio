@@ -18,6 +18,8 @@ config.read([initial_config_file_path, local_config_file_path])
 
 DEBUG = config.getboolean('debug', 'django')
 TEMPLATE_DEBUG = DEBUG
+TASTYPIE_FULL_DEBUG = DEBUG
+API_LIMIT_PER_PAGE = 50
 
 ADMINS = (
     ('kien', 'kien@studiomohu.com'),
@@ -138,6 +140,7 @@ INSTALLED_APPS = (
     'grappelli',
     'django.contrib.admin',
     'south',
+    'tastypie',
     'portfolio.projects',
     'blobstore_storage.testgae',
 )

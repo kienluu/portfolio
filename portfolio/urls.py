@@ -1,7 +1,13 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from tastypie.api import Api
+from portfolio.projects.api import ProjectResource, GroupResource
 
 admin.autodiscover()
+
+api_v1 = Api(api_name='v1')
+api_v1.register(ProjectResource())
+api_v1.register(GroupResource())
 
 urlpatterns = patterns('',
     # Examples:
@@ -14,5 +20,6 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),
 
     url(r'^media/', include('blobstore_storage.urls')),
-#    url(r'^uploads/', include('gaeblob_storage.urls')),
+
+    url(r'^api/', include(api_v1.urls))
 )

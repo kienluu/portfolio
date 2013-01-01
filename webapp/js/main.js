@@ -1,5 +1,5 @@
 /*
- TODO: I want to a way to load in a shared config file without polluting the
+ TODO: I want a way to load in a shared config file without polluting the
  global name space.  I have tried to require in a config.js file that is a
  module file which uses the require define function.  Once this is required in
  I run require.config with the passed in object literal.  But this did not.
@@ -18,6 +18,8 @@ require.config({
         jquery: 'lib/jquery/jquery',
         underscore: 'lib/underscore/underscore',
         backbone: 'lib/backbone/backbone',
+        'backbone.core': 'lib/backbone/backbone.core',
+        'backbone.relational': 'lib/backbone/plugins/backbone.relational',
         handlebars: 'lib/handlebars/handlebars',
         text: 'lib/requirejs/plugins/text'
     },
@@ -28,12 +30,12 @@ require.config({
         underscore: {
             exports: '_'
         },
-        backbone: {
+        'backbone.core': {
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'
         },
         'backbone.relational': {
-            deps: ['backbone']
+            deps: ['backbone.core']
         },
         handlebars: {
             exports: 'Handlebars'
@@ -46,10 +48,9 @@ require(
         'jquery',
         'underscore',
         'backbone',
-        'app/app'
+        'app/App'
     ],
     function($, _, Backbone, App) {
-        console.log('test');
         new App();
     }
 );
