@@ -1,16 +1,28 @@
 define(
     [
-        'jquery',
+        'jquery.all',
         'underscore',
         'backbone',
         'app/collections/GroupCollection',
-        'app/collections/ProjectCollection'
+        'app/views/TopNavView'
     ],
-    function($, _, backbone,
-        GroupCollection, ProjectCollection) {
-        var gc = new GroupCollection();
-        gc.fetch();
-        window.gc = gc;
-        return 'App string test';
+    function($, _, Backbone,
+        GroupCollection,
+        TopNavView) {
+
+        var AppView = Backbone.View.extend({
+            el: '#app-body',
+            initialize: function() {
+                this.groups = new GroupCollection();
+                window.groups = this.groups;
+                var topNavView = new TopNavView({
+                    groups: this.groups,
+                    container: $('.nav-wrapper')
+                });
+                this.groups.fetch();
+            }
+            // TODO: Maybe the app view html & data should be bootstrapped here.
+        });
+        return AppView;
     }
 );

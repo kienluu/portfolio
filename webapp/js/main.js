@@ -15,7 +15,8 @@ require.config({
         // Directory reroute.
         templates: '../templates/',
         // Library paths.
-        jquery: 'lib/jquery/jquery',
+        jquery: 'lib/jquery/jquery.core',
+        'jquery.all': 'lib/jquery/jquery.all',
         underscore: 'lib/underscore/underscore',
         backbone: 'lib/backbone/backbone',
         'backbone.core': 'lib/backbone/backbone.core',
@@ -45,12 +46,12 @@ require.config({
 
 require(
     [
-        'jquery',
+        'jquery.all',
         'underscore',
         'backbone',
         'app/App'
     ],
     function($, _, Backbone, App) {
-        new App();
+        var app = new App();
     }
 );

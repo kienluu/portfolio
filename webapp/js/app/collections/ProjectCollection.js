@@ -1,5 +1,5 @@
 define([
-    'jquery',
+    'jquery.all',
     'underscore',
     'backbone',
     'handlebars',

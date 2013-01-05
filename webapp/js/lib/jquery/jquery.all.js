@@ -1,5 +1,6 @@
 define([
-    'lib/jquery/jquery.core'
+    'jquery'
+//    'jquery.core'
     // Place plugins here
 ], function ($) {
     return $;
