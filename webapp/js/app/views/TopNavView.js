@@ -18,9 +18,11 @@ define([
 
             this.groups = options.groups;
             this.groups.on('change reset', this.render, this);
+            /* Use this to see what kind of Events gets called
             this.groups.on('all', function(event, object, xhr){
                 console.log(event);
             }, this);
+            */
 
             this.container = options.container;
             this.$container = $(this.container);
