@@ -4,19 +4,24 @@ define([
     'backbone',
     'handlebars',
     // Templates
-    'text!app/templates/topNavView.hbs',
+    'text!app/templates/TopNavTpl.hbs',
     // App
-    'app/collections/GroupCollection'
-], function ($, _, Backbone, HandleBars,
-        topNavViewTpl,
-        GroupCollection
+    'app/collections/GroupCollection',
+    'app/views/TopNavItemView'
+], function ($, _, Backbone, HandleBars
+        , topNavViewTpl
+        , GroupCollection
+        , TopNavItemView
     ) {
     var TopNavView = Backbone.View.extend({
+        tagName: 'div',
         initialize: function(options) {
             assert.ok(options.groups);
-            assert.ok(options.container);
 
+            this.itemViews = [];
             this.groups = options.groups;
+            this.groups.on('reset', this.onReset, this);
+            this.groups.on('add', this.onAdd, this);
             this.groups.on('change reset', this.render, this);
             /* Use this to see what kind of Events gets called
             this.groups.on('all', function(event, object, xhr){
@@ -24,17 +29,35 @@ define([
             }, this);
             */
 
-            this.container = options.container;
-            this.$container = $(this.container);
             this.$_template = Handlebars.compile(topNavViewTpl);
+            this.$el.html(this.template());
+            this.$ul = this.$el.find('ul');
         },
         render: function () {
-            this.$container.html(this.template());
+            _.each(this.itemViews, function(itemView){
+                itemView.render();
+            }, this);
         },
         template: function() {
             return this.$_template({
                 groups: this.groups.toJSON()
             });
+        },
+        onReset: function() {
+            _.each(this.groups.models, this.addItem, this);
+        },
+        onAdd: function(group, collection) {
+            this.addItem(group);
+        },
+        addItem: function(group) {
+            // Create a TopNavItemView and add it to the view
+            var itemView = new TopNavItemView({group: group});
+            this.itemViews.push(itemView);
+            this.$ul.append(itemView.$el);
+            // TODO: If this was dynamic, I would need a sorting method,
+            // maybe a way to sync the itemViews and itemView dom elements order
+            // in the ul to the collection order.
+            //_.sortBy(this.itemViews);
         }
     });
     return TopNavView;

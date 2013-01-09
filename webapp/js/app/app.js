@@ -4,7 +4,9 @@ define(
         'underscore',
         'backbone',
         'app/collections/GroupCollection',
-        'app/views/TopNavView'
+        'app/views/TopNavView',
+        // No return value modules
+        'app/globals'
     ],
     function($, _, Backbone,
         GroupCollection,
@@ -16,9 +18,9 @@ define(
                 this.groups = new GroupCollection();
                 window.groups = this.groups;
                 var topNavView = new TopNavView({
-                    groups: this.groups,
-                    container: $('.nav-wrapper')
+                    groups: this.groups
                 });
+                $('.nav-wrapper').append(topNavView.$el);
                 this.groups.fetch();
             }
             // TODO: Maybe the app view html & data should be bootstrapped here.
