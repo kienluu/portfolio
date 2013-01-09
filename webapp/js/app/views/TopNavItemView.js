@@ -12,8 +12,12 @@ define([
     , GroupModel
     ) {
     var TopNavItemView = Backbone.View.extend({
+        isSelected: false,
         tagName: 'li',
         className: 'top-nav-item',
+        events:{
+            "click": "onClick"
+        },
         initialize: function(options) {
             assert.ok(options.group);
 
@@ -24,6 +28,11 @@ define([
         },
         render: function() {
             this.$el.html(this.$_template(this.group.toJSON()));
+        },
+        onClick: function(me) {
+            if (this.isSelected) return;
+            this.isSelected = true;
+            this.trigger('selected', [this]);
         }
     });
     return TopNavItemView;
