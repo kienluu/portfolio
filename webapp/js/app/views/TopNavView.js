@@ -14,7 +14,6 @@ define([
         , TopNavItemView
     ) {
     var TopNavView = Backbone.View.extend({
-        tagName: 'div',
         initialize: function(options) {
             assert.ok(options.groups);
 
@@ -31,7 +30,7 @@ define([
 
             this.$_template = Handlebars.compile(topNavViewTpl);
             this.$el.html(this.template());
-            this.$ul = this.$el.find('ul');
+            this.$ul = this.$('ul');
         },
         render: function () {
             _.each(this.itemViews, function(itemView){
@@ -53,7 +52,7 @@ define([
             // Create a TopNavItemView and add it to the view
             var itemView = new TopNavItemView({group: group});
             this.itemViews.push(itemView);
-            itemView.on('selected', this.onItemSelected);
+            itemView.on('selected', this.onItemSelected, this);
             this.$ul.append(itemView.$el);
             // TODO: If this was dynamic, I would need a sorting method,
             // maybe a way to sync the itemViews and itemView dom elements order
@@ -63,7 +62,7 @@ define([
         onItemSelected: function(e, t) {
             // Make this itemView the selected item and load the sidebar view from it
             _.each(this.itemViews, function(itemView){
-                if (itemView!==t){
+                if (itemView !== t){
                     itemView.isSelected = false;
                 }
             }, this);
