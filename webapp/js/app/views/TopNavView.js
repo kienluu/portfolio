@@ -59,10 +59,10 @@ define([
             // in the ul to the collection order.
             //_.sortBy(this.itemViews);
         },
-        onItemSelected: function(e, t) {
+        onItemSelected: function(selectedItem) {
             // Make this itemView the selected item and load the sidebar view from it
             _.each(this.itemViews, function(itemView){
-                if (itemView !== t){
+                if (itemView !== selectedItem){
                     itemView.isSelected = false;
                 }
             }, this);

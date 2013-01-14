@@ -32,7 +32,7 @@ define([
         onClick: function(me) {
             if (this.isSelected) return;
             this.isSelected = true;
-            this.trigger('selected', [this]);
+            this.trigger('selected', this);
         }
     });
     return TopNavItemView;
