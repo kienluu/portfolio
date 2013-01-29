@@ -7,13 +7,15 @@ define([
     'text!app/templates/TopNavTpl.hbs',
     // App
     'app/collections/GroupCollection',
-    'app/views/TopNavItemView'
+    'app/views/TopNavItemView',
+    'app/views/SelectableItemParentMixin'
 ], function ($, _, Backbone, HandleBars
         , topNavViewTpl
         , GroupCollection
         , TopNavItemView
+        , SelectableItemParentMixin
     ) {
-    var TopNavView = Backbone.View.extend({
+    var TopNavView = Backbone.View.extendWithMixin([SelectableItemParentMixin], {
         initialize: function(options) {
             assert.ok(options.groups);
 
@@ -28,7 +30,7 @@ define([
             }, this);
             */
 
-            this.$_template = Handlebars.compile(topNavViewTpl);
+            this.$_template = HandleBars.compile(topNavViewTpl);
             this.$el.html(this.template());
             this.$ul = this.$('ul');
         },
@@ -52,21 +54,18 @@ define([
             // Create a TopNavItemView and add it to the view
             var itemView = new TopNavItemView({group: group});
             this.itemViews.push(itemView);
-            itemView.on('selected', this.onItemSelected, this);
+            itemView.on('selectableitem:selected', this.onSelectableItemSelected, this);
             this.$ul.append(itemView.$el);
-            // TODO: If this was dynamic, I would need a sorting method,
-            // maybe a way to sync the itemViews and itemView dom elements order
-            // in the ul to the collection order.
-            //_.sortBy(this.itemViews);
+            /*
+               TODO: If this was dynamic, I would need a sorting method,
+               maybe a way to sync the itemViews and itemView dom elements order
+               in the ul to the collection order.
+            _.sortBy(this.itemViews);
+            */
         },
-        onItemSelected: function(selectedItem) {
-            // Make this itemView the selected item and load the sidebar view from it
-            _.each(this.itemViews, function(itemView){
-                if (itemView !== selectedItem){
-                    itemView.isSelected = false;
-                }
-            }, this);
-            // TODO: Create Sidebar here
+        // SelectableItemParentMixin method
+        getSelectableItemViews: function () {
+            return this.itemViews;
         }
     });
     return TopNavView;

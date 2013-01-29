@@ -6,33 +6,29 @@ define([
     // Templates
     'text!app/templates/TopNavItemTpl.hbs',
     // App
-    'app/models/GroupModel'
+//    'app/models/GroupModel',
+    'app/views/SelectableItemMixin'
 ], function ($, _, Backbone, HandleBars
     , topNavItemTpl
-    , GroupModel
+//    , GroupModel
+    , SelectableItemMixin
     ) {
-    var TopNavItemView = Backbone.View.extend({
-        isSelected: false,
+    var TopNavItemView = Backbone.View.extendWithMixin([SelectableItemMixin], {
         tagName: 'li',
         className: 'top-nav-item',
         events:{
-            "click": "onClick"
+            "click": "onSelectableItemClick"
         },
         initialize: function(options) {
             assert.ok(options.group);
 
             this.group = options.group;
             this.$_template = HandleBars.compile(topNavItemTpl);
-            this.group.on("change", this.render)
+            this.group.on("change", this.render);
             this.render();
         },
         render: function() {
             this.$el.html(this.$_template(this.group.toJSON()));
-        },
-        onClick: function(me) {
-            if (this.isSelected) return;
-            this.isSelected = true;
-            this.trigger('selected', this);
         }
     });
     return TopNavItemView;

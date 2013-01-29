@@ -21,6 +21,7 @@ require.config({
         backbone: 'lib/backbone/backbone',
         'backbone.core': 'lib/backbone/backbone.core',
         'backbone.relational': 'lib/backbone/plugins/backbone.relational',
+        'backbone.mixin': 'lib/backbone/plugins/backbone.mixin',
         handlebars: 'lib/handlebars/handlebars',
         text: 'lib/requirejs/plugins/text'
     },

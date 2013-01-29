@@ -21,7 +21,12 @@ define(
                     groups: this.groups
                 });
                 $('.nav-wrapper').append(topNavView.$el);
+                topNavView.on('selectableitem:selected', this.onNavItemSelected)
                 this.groups.fetch();
+            },
+            onNavItemSelected: function(selectedItem) {
+                // Change the sidebar here.
+                ;
             }
             // TODO: Maybe the app view html & data should be bootstrapped here.
         });
