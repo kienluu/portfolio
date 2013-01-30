@@ -8,22 +8,22 @@ define([
     // App
     'app/collections/GroupCollection',
     'app/views/TopNavItemView',
-    'app/views/SelectableItemParentMixin'
+    'app/views/SelectableItemParentMixin',
+    'app/views/CollectionViewMixin'
+
 ], function ($, _, Backbone, HandleBars
         , topNavViewTpl
         , GroupCollection
         , TopNavItemView
         , SelectableItemParentMixin
+        , CollectionViewMixin
     ) {
-    var TopNavView = Backbone.View.extendWithMixin([SelectableItemParentMixin], {
+    var TopNavView = Backbone.View.extendWithMixin([SelectableItemParentMixin, CollectionViewMixin], {
         initialize: function(options) {
             assert.ok(options.groups);
 
             this.itemViews = [];
             this.groups = options.groups;
-            this.groups.on('reset', this.onReset, this);
-            this.groups.on('add', this.onAdd, this);
-            this.groups.on('change reset', this.render, this);
             /* Use this to see what kind of Events gets called
             this.groups.on('all', function(event, object, xhr){
                 console.log(event);
@@ -33,35 +33,33 @@ define([
             this.$_template = HandleBars.compile(topNavViewTpl);
             this.$el.html(this.template());
             this.$ul = this.$('ul');
-        },
-        render: function () {
-            _.each(this.itemViews, function(itemView){
-                itemView.render();
+
+            this.initCollectionView();
+            this.on('collectionview:additem', function (itemViewDict) {
+                itemViewDict.view.on('selectableitem:selected', this.onSelectableItemSelected, this);
+            }, this);
+            this.on('collectionview:removeitem', function (itemViewDict) {
+                itemViewDict.view.off('selectableitem:selected', this.onSelectableItemSelected, this);
             }, this);
         },
+        render: function () {
+            // This should eitheir stay blank or redraw the this view plus append and draw all the the collection's views again.
+        },
         template: function() {
-            return this.$_template({
-                groups: this.groups.toJSON()
-            });
+            return this.$_template({});
         },
-        onReset: function() {
-            _.each(this.groups.models, this.addItem, this);
+        // CollectionViewMixin methods
+        getCollection: function () {
+            return this.groups;
         },
-        onAdd: function(group, collection) {
-            this.addItem(group);
+        getCollectionItemViewClass: function () {
+            return TopNavItemView;
         },
-        addItem: function(group) {
-            // Create a TopNavItemView and add it to the view
-            var itemView = new TopNavItemView({group: group});
-            this.itemViews.push(itemView);
-            itemView.on('selectableitem:selected', this.onSelectableItemSelected, this);
+        getCollectionItemViewOptions: function (model) {
+            return { group: model };
+        },
+        collectionAppendItemView: function (itemView) {
             this.$ul.append(itemView.$el);
-            /*
-               TODO: If this was dynamic, I would need a sorting method,
-               maybe a way to sync the itemViews and itemView dom elements order
-               in the ul to the collection order.
-            _.sortBy(this.itemViews);
-            */
         },
         // SelectableItemParentMixin method
         getSelectableItemViews: function () {
