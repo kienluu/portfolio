@@ -24,13 +24,13 @@ define([
         },
         getCollectionItemViewDictFromModel: function (model) {
             var matchIndex;
-            _(this.itemViewDictList).every(function (itemViewDict, index) {
+            _.every(this.itemViewDictList, function (itemViewDict, index) {
                 if (itemViewDict.model === model) {
                     matchIndex = index;
                     return false;
                 }
                 return true;
-            });
+            }, this);
             return matchIndex;
         },
         getCollectionItemViewOptions: function (model) {

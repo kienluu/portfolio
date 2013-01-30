@@ -4,7 +4,7 @@ define([
     'backbone',
     'handlebars',
     // Templates
-    'text!app/templates/TopNavTpl.hbs',
+    'text!app/templates/TopNavTpl.html',
     // App
     'app/collections/GroupCollection',
     'app/views/TopNavItemView',
@@ -12,7 +12,7 @@ define([
     'app/views/CollectionViewMixin'
 
 ], function ($, _, Backbone, HandleBars
-        , topNavViewTpl
+        , topNavViewHtml
         , GroupCollection
         , TopNavItemView
         , SelectableItemParentMixin
@@ -30,8 +30,7 @@ define([
             }, this);
             */
 
-            this.$_template = HandleBars.compile(topNavViewTpl);
-            this.$el.html(this.template());
+            this.$el.html(topNavViewHtml);
             this.$ul = this.$('ul');
 
             this.initCollectionView();
@@ -44,9 +43,6 @@ define([
         },
         render: function () {
             // This should eitheir stay blank or redraw the this view plus append and draw all the the collection's views again.
-        },
-        template: function() {
-            return this.$_template({});
         },
         // CollectionViewMixin methods
         getCollection: function () {

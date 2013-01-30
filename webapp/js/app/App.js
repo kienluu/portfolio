@@ -3,6 +3,7 @@ define(
         'jquery.all',
         'underscore',
         'backbone',
+        // App
         'app/collections/GroupCollection',
         'app/views/TopNavView',
         // No return value modules
@@ -21,7 +22,7 @@ define(
                     groups: this.groups
                 });
                 $('.nav-wrapper').append(topNavView.$el);
-                topNavView.on('selectableitem:selected', this.onNavItemSelected)
+                topNavView.on('selectableitem:selected', this.onNavItemSelected);
                 this.groups.fetch();
             },
             onNavItemSelected: function(selectedItem) {
