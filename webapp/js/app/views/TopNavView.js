@@ -22,7 +22,6 @@ define([
         initialize: function(options) {
             assert.ok(options.groups);
 
-            this.itemViews = [];
             this.groups = options.groups;
             /* Use this to see what kind of Events gets called
             this.groups.on('all', function(event, object, xhr){
@@ -30,7 +29,7 @@ define([
             }, this);
             */
 
-            this.$el.html(topNavViewHtml);
+            this.setElement($(topNavViewHtml));
             this.$ul = this.$('ul');
 
             this.initCollectionView();
@@ -59,7 +58,7 @@ define([
         },
         // SelectableItemParentMixin method
         getSelectableItemViews: function () {
-            return this.itemViews;
+            return this.getCollectionItemViews();
         }
     });
     return TopNavView;

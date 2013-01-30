@@ -22,6 +22,9 @@ define([
         getCollectionItemViewClass: function (model) {
             throw "Please override this abstract method";
         },
+        getCollectionItemViews: function () {
+            return _.pluck(this.itemViewDictList, 'view');
+        },
         getCollectionItemViewDictFromModel: function (model) {
             var matchIndex;
             _.every(this.itemViewDictList, function (itemViewDict, index) {
