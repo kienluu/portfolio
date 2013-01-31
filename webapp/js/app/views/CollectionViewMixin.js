@@ -83,6 +83,14 @@ define([
             _.each(this.itemViewDictList, function(itemViewDict){
                 itemViewDict.view.render();
             }, this);
+        },
+        collectionDestroyItemViews: function () {
+            this.getCollection().off(null, null, this);
+            _.each(this.itemViewDictList, function(itemViewDict){
+                if (_.isFunction(itemViewDict.view.destroy)){
+                    itemViewDict.view.destroy();
+                }
+            }, this);
         }
     };
     return CollectionViewMixin;

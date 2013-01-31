@@ -32,13 +32,13 @@ define([
             this.setElement($(topNavViewHtml));
             this.$ul = this.$('ul');
 
-            this.initCollectionView();
             this.on('collectionview:additem', function (itemViewDict) {
                 itemViewDict.view.on('selectableitem:selected', this.onSelectableItemSelected, this);
             }, this);
             this.on('collectionview:removeitem', function (itemViewDict) {
-                itemViewDict.view.off('selectableitem:selected', this.onSelectableItemSelected, this);
+                itemViewDict.view.remove();
             }, this);
+            this.initCollectionView();
         },
         render: function () {
             // This should eitheir stay blank or redraw the this view plus append and draw all the the collection's views again.
@@ -59,6 +59,9 @@ define([
         // SelectableItemParentMixin method
         getSelectableItemViews: function () {
             return this.getCollectionItemViews();
+        },
+        destroy: function () {
+            // TODO: Implementation
         }
     });
     return TopNavView;

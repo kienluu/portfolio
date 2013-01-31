@@ -29,6 +29,9 @@ define([
         },
         render: function() {
             this.$el.html(this.$_template(this.group.toJSON()));
+        },
+        destroy: function () {
+            // TODO: Implementation
         }
     });
     return TopNavItemView;
