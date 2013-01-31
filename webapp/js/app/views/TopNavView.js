@@ -9,7 +9,8 @@ define([
     'app/collections/GroupCollection',
     'app/views/TopNavItemView',
     'app/views/SelectableItemParentMixin',
-    'app/views/CollectionViewMixin'
+    'app/views/CollectionViewMixin',
+    'app/views/CollectionViewFindByModelMixin'
 
 ], function ($, _, Backbone, HandleBars
         , topNavViewHtml
@@ -17,8 +18,9 @@ define([
         , TopNavItemView
         , SelectableItemParentMixin
         , CollectionViewMixin
+        , CollectionViewFindByModelMixin
     ) {
-    var TopNavView = Backbone.View.extendWithMixin([SelectableItemParentMixin, CollectionViewMixin], {
+    var TopNavView = Backbone.View.extendWithMixin([SelectableItemParentMixin, CollectionViewMixin, CollectionViewFindByModelMixin], {
         initialize: function(options) {
             assert.ok(options.groups);
 
@@ -60,9 +62,15 @@ define([
         getSelectableItemViews: function () {
             return this.getCollectionItemViews();
         },
+        // CollectionViewFindByModelMixin methods
+        getCollectionItemViewModelAttrName: function(){
+            return 'group';
+        },
+
         destroy: function () {
             // TODO: Implementation
         }
+
     });
     return TopNavView;
 });

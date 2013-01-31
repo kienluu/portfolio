@@ -4,25 +4,43 @@ define([
     'backbone',
     'handlebars',
     // App
+    'app/utilities/OnReadyMixin',
     'app/collections/GroupCollection',
     'app/views/TopNavView',
     'app/views/SidebarView'
 ], function ($, _, Backbone, HandleBars
+    , OnReadyMixin
     , GroupCollection
     , TopNavView
     , SidebarView
     ) {
-    var GroupRouter = Backbone.Router.extend({
+    var GroupRouter = Backbone.Router.extendWithMixin([OnReadyMixin],{
         routes: {
             'group/:groupname': 'openGroup',
             'group/:groupname-:projectname': 'openProject'
         },
         openGroup: function (groupName) {
-            ;
+            this.runWhenReady(function() {
+                var group = this.topNavView.collectionFindItemViewDictByModelSlug(groupName).model;
+                if (this.currentGroup && this.currentGroup === group) return;
+                this.currentGroup = group;
+                this.prevSidebar = this.sidebar;
+                this.sidebar = new SidebarView({collection:group.get('projects')});
+                this.sidebar.on('selectableitem:selected', this.onSidebarItemSelected, this);
+                // FIXME: jquery empty remove events.  Will this remove Backbone events?
+                this.$sidebarBox.empty().append(this.sidebar.$el);
+                if (this.prevSidebar){
+                    this.prevSidebar.destroy();
+                }
+                this.trigger('sidebar:created', this.sidebar);
+            });
         },
-        openProject: function (groupName, ProjectName) {
-            openGroup(groupName);
-
+        openProject: function (groupName, projectName) {
+            this.runWhenReady(function() {
+                this.openGroup(groupName);
+                var project = this.collectionFindItemViewDictByModelSlug(projectName).model;
+                this.$contentBox.html(project.get('content'));
+            });
         },
         initialize: function(options) {
             this.$navBox = options.$navBox;
@@ -39,24 +57,14 @@ define([
 
             this.groups.once('reset', function(){
                 this.$navBox.append(this.topNavView.$el);
-                this.trigger('ready');
-//                $('.nav-wrapper li').eq(0).click();
+                this.setReady();
             }, this);
         },
         onNavItemSelected: function(selectedItemView) {
             // Change the sidebar here.
-            this.prevSidebar = this.sidebar;
-            this.sidebar = new SidebarView({collection:selectedItemView.group.get('projects')});
-            this.sidebar.on('selectableitem:selected', this.onSidebarItemSelected, this);
-            // FIXME: jquery empty remove events.  Will this remove Backbone events?
-            this.$sidebarBox.empty().append(this.sidebar.$el);
-            if (this.prevSidebar){
-                this.prevSidebar.destroy();
-            }
-            this.trigger('sidebar:created', this.sidebar);
+//            this.navigate('group/'+selectedItemView.getModel().getSlug(), {trigger:true, replace:true});
         },
         onSidebarItemSelected: function(selectedItemView) {
-            this.$contentBox.html(selectedItemView.project.get('content'));
         }
     });
     return GroupRouter;

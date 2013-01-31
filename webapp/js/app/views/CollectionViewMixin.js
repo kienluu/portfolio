@@ -4,7 +4,6 @@ define([
     'backbone',
     'handlebars'
 ], function ($, _, Backbone, HandleBars) {
-    var test = 'collection';
     var CollectionViewMixin = {
         itemViewDictList: [],
         initCollectionView: function () {
@@ -29,7 +28,7 @@ define([
         getCollectionItemViews: function () {
             return _.pluck(this.itemViewDictList, 'view');
         },
-        getCollectionItemViewDictFromModel: function (model) {
+        getCollectionItemViewDictIndexFromModel: function (model) {
             var matchIndex;
             _.every(this.itemViewDictList, function (itemViewDict, index) {
                 if (itemViewDict.model === model) {
@@ -58,7 +57,7 @@ define([
             this.collectionRemoveItem(model, collection);
         },
         collectionRemoveItem: function(model, collection) {
-            var removeIndex = this.getCollectionItemViewDictFromModel(model);
+            var removeIndex = this.getCollectionItemViewDictIndexFromModel(model);
             if (removeIndex === undefined) return;
             var itemViewDict = this.itemViewDictList.splice(removeIndex, 1);
 

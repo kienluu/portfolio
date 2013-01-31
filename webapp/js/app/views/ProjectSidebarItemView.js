@@ -27,6 +27,9 @@ define([
         },
         render: function() {
             this.$el.html(this.$_template({project:this.project.toJSON()}));
+        },
+        getModel: function() {
+            return this.project;
         }
         
     });

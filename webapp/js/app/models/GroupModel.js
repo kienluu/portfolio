@@ -23,7 +23,11 @@ define([
                 key: 'groupSet',
                 includeInJSON: 'id'
             }
-        }]
+        }],
+        getSlug: function () {
+            // This will be the name used in the backbone router.
+            return this.get('id');
+        }
     });
 
     return GroupModel;

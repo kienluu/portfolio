@@ -30,6 +30,9 @@ define([
         render: function() {
             this.$el.html(this.$_template(this.group.toJSON()));
         },
+        getModel: function() {
+            return this.group;
+        },
         destroy: function () {
             // TODO: Implementation
         }

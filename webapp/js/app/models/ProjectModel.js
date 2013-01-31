@@ -8,6 +8,10 @@ define([
         defaults: {
             title: "",
             content: null
+        },
+        getSlug: function () {
+            // This will be the name used in the backbone router.
+            return this.get('id');
         }
     });
     return ProjectModel;

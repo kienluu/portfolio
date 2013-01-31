@@ -20,6 +20,8 @@ define(
                     $sidebarBox: this.$('.sidebar-wrapper'),
                     $contentBox: this.$('.content-wrapper')
                 });
+                Backbone.history.start();
+
             }
         });
         return AppView;
