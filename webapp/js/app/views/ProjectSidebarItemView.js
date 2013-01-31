@@ -3,9 +3,12 @@ define([
     ,'underscore'
     ,'backbone'
     ,'handlebars'
+    // Templates
+    ,'text!app/templates/projectItemTpl.hbs'
     // App
     ,'app/views/SelectableItemMixin'
 ], function($, _, Backbone, HandleBars
+    , projectItemTpl
     , SelectableItemMixin
     ) {
     var ProjectSidebarItemView = Backbone.View.extendWithMixin([SelectableItemMixin], {
@@ -18,11 +21,12 @@ define([
             assert.ok(options.project);
 
             this.project = options.project;
+            this.$_template = Handlebars.compile(projectItemTpl);
             this.project.on("change", this.render);
             this.render();
         },
         render: function() {
-            this.$el.html($('<a>'+this.project.get('title')+'</a>'));
+            this.$el.html(this.$_template({project:this.project.toJSON()}));
         }
         
     });
