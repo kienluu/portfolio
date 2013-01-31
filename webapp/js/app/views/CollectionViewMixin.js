@@ -15,6 +15,10 @@ define([
             collection.on('change reset', function () {
                 this.collectionRenderItemViews();
             }, this);
+            if (collection.length) {
+                this.onCollectionReset(collection, this.options);
+                this.collectionRenderItemViews();
+            }
         },
         getCollection: function () {
             throw "Please override this abstract method.";
