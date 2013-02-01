@@ -18,6 +18,8 @@ require.config({
         jquery: 'lib/jquery/jquery.core',
         'jquery.all': 'lib/jquery/jquery.all',
         underscore: 'lib/underscore/underscore',
+        'underscore.core': 'lib/underscore/underscore.core',
+        'underscore.string': 'lib/underscore/plugins/underscore.string',
         backbone: 'lib/backbone/backbone',
         'backbone.core': 'lib/backbone/backbone.core',
         'backbone.relational': 'lib/backbone/plugins/backbone.relational',
@@ -27,10 +29,13 @@ require.config({
     },
     // Seconds to wait before giving up on loading a script.
     // TODO: Need error handling if scripts do not load.
-    waitSeconds: 15,
+    waitSeconds: 5,
     shim: {
-        underscore: {
+        'underscore.core': {
             exports: '_'
+        },
+        'underscore.string': {
+            deps: ['underscore.core']
         },
         'backbone.core': {
             deps: ['underscore', 'jquery'],

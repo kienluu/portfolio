@@ -17,28 +17,28 @@ define([
     var GroupRouter = Backbone.Router.extendWithMixin([OnReadyMixin],{
         routes: {
             'group/:groupname': 'openGroup',
-            'group/:groupname-:projectname': 'openProject'
+            'group/:groupname/:projectname': 'openProject'
         },
         openGroup: function (groupName) {
             this.runWhenReady(function() {
                 var group = this.topNavView.collectionFindItemViewDictByModelSlug(groupName).model;
                 if (this.currentGroup && this.currentGroup === group) return;
                 this.currentGroup = group;
-                this.prevSidebar = this.sidebar;
-                this.sidebar = new SidebarView({collection:group.get('projects')});
-                this.sidebar.on('selectableitem:selected', this.onSidebarItemSelected, this);
+                this.prevSidebarView = this.sidebarView;
+                this.sidebarView = new SidebarView({group: group});
+                this.sidebarView.on('selectableitem:selected', this.onSidebarItemSelected, this);
                 // FIXME: jquery empty remove events.  Will this remove Backbone events?
-                this.$sidebarBox.empty().append(this.sidebar.$el);
-                if (this.prevSidebar){
-                    this.prevSidebar.destroy();
+                this.$sidebarBox.empty().append(this.sidebarView.$el);
+                if (this.prevSidebarView){
+                    this.prevSidebarView.destroy();
                 }
-                this.trigger('sidebar:created', this.sidebar);
+                this.trigger('sidebar:created', this.sidebarView);
             });
         },
         openProject: function (groupName, projectName) {
             this.runWhenReady(function() {
                 this.openGroup(groupName);
-                var project = this.collectionFindItemViewDictByModelSlug(projectName).model;
+                var project = this.sidebarView.collectionFindItemViewDictByModelSlug(projectName).model;
                 this.$contentBox.html(project.get('content'));
             });
         },
