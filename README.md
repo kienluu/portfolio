@@ -11,3 +11,23 @@ with the ability to edit and update sass live (no page reload needed).
 ```
 compass watch --debug
 ```
+
+## GAE mysql & database setup
+Install cloud sql commandline tools [here](https://developers.google.com/cloud-sql/docs/commandline)
+Move the files to /usr/local/bin or somewhere in you sys PATH.
+
+```bash
+$ sudo chmod +x /usr/local/bin/google_sql.sh
+$ google_sql.sh 'kienluu-sql:alpha'
+sql> CREATE DATABASE $project_name DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+sql> CREATE USER '$project_name'@'localhost' IDENTIFIED BY '$project_name;
+sql> GRANT ALL ON $project_name.* TO '$project_name'@'localhost';
+sql> FLUSH PRIVILEGES;
+sql> exit;
+IS_APP_ENGINE=true ./manage.py syncdb
+```
+
+Import or run sql on the cloud sql instance with the commandline tool:
+```
+google_sql.sh 'kienluu-sql:alpha' portfolio --user=portfolio --pass=portfolio < portfolio.sql
+```
