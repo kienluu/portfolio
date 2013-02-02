@@ -26,7 +26,7 @@ define([
         }],
         getSlug: function () {
             // This will be the name used in the backbone router.
-            return this.get('id');
+            return this.get('slug');
         }
     });
 

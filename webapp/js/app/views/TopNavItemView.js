@@ -28,7 +28,10 @@ define([
             this.render();
         },
         render: function() {
-            this.$el.html(this.$_template(this.group.toJSON()));
+            this.$el.html(this.$_template({
+                group: this.group.toJSON(),
+                slug: this.group.getSlug()
+            }));
         },
         getModel: function() {
             return this.group;
