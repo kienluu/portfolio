@@ -24,10 +24,28 @@ sql> CREATE USER '$project_name'@'localhost' IDENTIFIED BY '$project_name;
 sql> GRANT ALL ON $project_name.* TO '$project_name'@'localhost';
 sql> FLUSH PRIVILEGES;
 sql> exit;
-IS_APP_ENGINE=true ./manage.py syncdb
+IS_APP_ENGINE=True SETTINGS_MODE=prod ./manage.py syncdb
 ```
 
 Import or run sql on the cloud sql instance with the commandline tool:
 ```
 google_sql.sh 'kienluu-sql:alpha' portfolio --user=portfolio --pass=portfolio < portfolio.sql
 ```
+
+## Running the manage commands with different settings
+
+Example for using gae_settings.ini
+```
+APPENGINE_PRODUCTION=True ./manage.py migrate
+# equivalent to
+IS_APP_ENGINE=True SETTINGS_MODE=prod
+```
+
+Example for using gae_local_settings.ini
+```
+IS_APP_ENGINE=True ./manage.py migrate
+```
+
+If these are not set then local_settings.ini is used instead.
+
+

@@ -7,9 +7,18 @@ config = ConfigParser()
 config.optionxform = str
 initial_config_file_path = os.path.join(
     SETTINGS_DIR, '..', 'configuration', 'settings', 'initial_settings.ini')
-if os.environ.get('IS_APP_ENGINE') == 'true':
-    local_config_file_path = os.path.join(
-        SETTINGS_DIR, '..', 'configuration', 'settings', 'gae_settings.ini')
+# Use Appengine production settings shortcut env variable for ./manage commands
+if os.environ.get('APPENGINE_PRODUCTION'):
+    os.environ['IS_APP_ENGINE'] = 'True'
+if os.environ.get('IS_APP_ENGINE') == 'True':
+    if os.environ.get('APPENGINE_PRODUCTION'):
+        local_config_file_path = os.path.join(
+            SETTINGS_DIR, '..', 'configuration',
+            'settings', 'gae_settings.ini')
+    else:
+        local_config_file_path = os.path.join(
+            SETTINGS_DIR, '..', 'configuration',
+            'settings', 'gae_local_settings.ini')
 else:
     local_config_file_path = os.path.join(
         SETTINGS_DIR, '..', 'configuration', 'settings', 'local_settings.ini')
@@ -142,7 +151,6 @@ INSTALLED_APPS = (
     'south',
     'tastypie',
     'portfolio.projects',
-    'blobstore_storage.testgae',
 )
 INSTALLED_APPS += tuple(config.getlist('installed_apps', 'append'))
 
