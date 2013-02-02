@@ -4,7 +4,7 @@ from portfolio.projects.models import ProjectGroupInfo, Project, Group
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("title",)}
 
 
 class ProjectGroupInfoInline(TabularInline):
@@ -13,6 +13,7 @@ class ProjectGroupInfoInline(TabularInline):
     sortable_field_name = 'position'
     extra = 0
 class GroupAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
     inlines = [ProjectGroupInfoInline]
 
 
