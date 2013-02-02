@@ -8,7 +8,7 @@ define([
     'app/collections/ProjectCollection'
 ], function ($, _, Backbone, HandleBars,
         ProjectModel, ProjectCollection) {
-    var GroupModel = Backbone.RelationalModel.extend({
+    return Backbone.RelationalModel.extend({
         defaults: {
             name: "",
             description: "",
@@ -29,6 +29,4 @@ define([
             return this.get('slug');
         }
     });
-
-    return GroupModel;
 });

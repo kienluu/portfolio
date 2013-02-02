@@ -20,7 +20,7 @@ define([
         , CollectionViewMixin
         , CollectionViewFindByModelMixin
     ) {
-    var TopNavView = Backbone.View.extendWithMixin([SelectableItemParentMixin, CollectionViewMixin, CollectionViewFindByModelMixin], {
+    return Backbone.View.extendWithMixin([SelectableItemParentMixin, CollectionViewMixin, CollectionViewFindByModelMixin], {
         initialize: function(options) {
             assert.ok(options.groups);
 
@@ -72,5 +72,4 @@ define([
         }
 
     });
-    return TopNavView;
 });

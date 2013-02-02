@@ -4,7 +4,7 @@ define([
     'backbone',
     'handlebars'
 ], function ($, _, Backbone, HandleBars) {
-    var ProjectModel = Backbone.RelationalModel.extend({
+    return Backbone.RelationalModel.extend({
         defaults: {
             title: "",
             content: null
@@ -14,5 +14,4 @@ define([
             return this.get('slug');
         }
     });
-    return ProjectModel;
 });

@@ -14,7 +14,7 @@ define([
     , TopNavView
     , SidebarView
     ) {
-    var GroupRouter = Backbone.Router.extendWithMixin([OnReadyMixin],{
+    return Backbone.Router.extendWithMixin([OnReadyMixin],{
         routes: {
             'group/:groupname': 'openGroup',
             'group/:groupname/:projectname': 'openProject'
@@ -67,5 +67,4 @@ define([
         onSidebarItemSelected: function(selectedItemView) {
         }
     });
-    return GroupRouter;
 });

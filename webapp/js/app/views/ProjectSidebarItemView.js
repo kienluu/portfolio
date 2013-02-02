@@ -11,7 +11,7 @@ define([
     , projectItemTpl
     , SelectableItemMixin
     ) {
-    var ProjectSidebarItemView = Backbone.View.extendWithMixin([SelectableItemMixin], {
+    return Backbone.View.extendWithMixin([SelectableItemMixin], {
         tagName: 'li',
         className: 'sidebar-nav-item project-type',
         events:{
@@ -36,7 +36,6 @@ define([
         getModel: function() {
             return this.project;
         }
-        
+
     });
-    return ProjectSidebarItemView;
 });

@@ -13,7 +13,7 @@ define([
 //    , GroupModel
     , SelectableItemMixin
     ) {
-    var TopNavItemView = Backbone.View.extendWithMixin([SelectableItemMixin], {
+    return Backbone.View.extendWithMixin([SelectableItemMixin], {
         tagName: 'li',
         className: 'top-nav-item',
         events:{
@@ -40,5 +40,4 @@ define([
             // TODO: Implementation
         }
     });
-    return TopNavItemView;
 });

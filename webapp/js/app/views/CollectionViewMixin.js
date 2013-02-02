@@ -4,7 +4,7 @@ define([
     'backbone',
     'handlebars'
 ], function ($, _, Backbone, HandleBars) {
-    var CollectionViewMixin = {
+    return {
         itemViewDictList: [],
         initCollectionView: function () {
             var collection = this.getCollection();
@@ -92,5 +92,4 @@ define([
             }, this);
         }
     };
-    return CollectionViewMixin;
 });

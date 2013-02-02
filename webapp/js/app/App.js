@@ -12,7 +12,7 @@ define(
         , GroupRouter
         ) {
 
-        var AppView = Backbone.View.extend({
+        return Backbone.View.extend({
             el: '#app-body',
             initialize: function() {
                 this.groupRouter = new GroupRouter({
@@ -24,6 +24,5 @@ define(
 
             }
         });
-        return AppView;
     }
 );

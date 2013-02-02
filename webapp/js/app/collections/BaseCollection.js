@@ -4,7 +4,7 @@ define([
     'backbone',
     'handlebars'
 ], function ($, _, Backbone, HandleBars) {
-    var BaseCollection = Backbone.Collection.extend({
+    return Backbone.Collection.extend({
         apiRoot: "/api/v1/",
         url: function (models) {
             if (!this.resourceName){
@@ -17,5 +17,4 @@ define([
             return response.objects;
         }
     });
-    return BaseCollection;
 });

@@ -18,7 +18,7 @@ define([
     , CollectionViewMixin
     , CollectionViewFindByModelMixin
     ) {
-    var SidebarView = Backbone.View.extendWithMixin(
+    return Backbone.View.extendWithMixin(
             [SelectableItemParentMixin, CollectionViewMixin, CollectionViewFindByModelMixin], {
         initialize: function(options) {
             assert.ok(options.group);
@@ -74,5 +74,4 @@ define([
             this.collectionDestroyItemViews();
         }
     });
-    return SidebarView;
 });

@@ -8,7 +8,7 @@ define([
     'backbone',
     'handlebars'
 ], function ($, _, Backbone, HandleBars) {
-    var CollectionViewFindByModelMixin = {
+    return {
         collectionFindItemViewDictByModelSlug: function(slug) {
             // A lookup table would be better here.  Ideally there should be another CollectionViewModel, that does not allow duplicate slugs then we could use a lookup table on a slug
             var matchedItemViewDict = _.find(this.itemViewDictList, function(dict) {
@@ -35,5 +35,4 @@ define([
             return 'getSlug';
         }
     };
-    return CollectionViewFindByModelMixin;
 });

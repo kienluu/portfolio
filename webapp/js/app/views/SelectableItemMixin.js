@@ -4,7 +4,7 @@ define([
     'backbone',
     'handlebars'
 ], function($, _, Backbone, HandleBars) {
-    var SelectableItemMixin = {
+    return {
         isSelected: false,
         onSelectableItemClick: function() {
             if (this.isSelected) return;
@@ -12,5 +12,4 @@ define([
             this.trigger('selectableitem:selected', this);
         }
     };
-    return SelectableItemMixin;
 });

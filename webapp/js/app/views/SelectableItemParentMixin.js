@@ -4,7 +4,7 @@ define([
     'backbone',
     'handlebars'
 ], function($, _, Backbone, HandleBars) {
-    var SelectableItemParentMixin = {
+    return {
         getSelectableItemViews: function () {
             throw "Please override this abstract method.";
         },
@@ -20,5 +20,4 @@ define([
             this.trigger('selectableitem:selected', selectedItem);
         }
     };
-    return SelectableItemParentMixin;
 });
