@@ -9,8 +9,8 @@ initial_config_file_path = os.path.join(
     SETTINGS_DIR, '..', 'configuration', 'settings', 'initial_settings.ini')
 # Use Appengine production settings shortcut env variable for ./manage commands
 if os.environ.get('APPENGINE_PRODUCTION'):
-    os.environ['IS_APP_ENGINE'] = 'True'
-if os.environ.get('IS_APP_ENGINE') == 'True':
+    os.environ['IS_APPENGINE'] = 'True'
+if os.environ.get('IS_APPENGINE') == 'True':
     if os.environ.get('APPENGINE_PRODUCTION'):
         local_config_file_path = os.path.join(
             SETTINGS_DIR, '..', 'configuration',

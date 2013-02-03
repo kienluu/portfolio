@@ -24,7 +24,7 @@ sql> CREATE USER '$project_name'@'localhost' IDENTIFIED BY '$project_name;
 sql> GRANT ALL ON $project_name.* TO '$project_name'@'localhost';
 sql> FLUSH PRIVILEGES;
 sql> exit;
-IS_APP_ENGINE=True SETTINGS_MODE=prod ./manage.py syncdb
+IS_APPENGINE=True SETTINGS_MODE=prod ./manage.py syncdb
 ```
 
 Import or run sql on the cloud sql instance with the commandline tool:
@@ -38,12 +38,12 @@ Example for using gae_settings.ini
 ```
 APPENGINE_PRODUCTION=True ./manage.py migrate
 # equivalent to
-IS_APP_ENGINE=True SETTINGS_MODE=prod
+IS_APPENGINE=True SETTINGS_MODE=prod
 ```
 
 Example for using gae_local_settings.ini
 ```
-IS_APP_ENGINE=True ./manage.py migrate
+IS_APPENGINE=True ./manage.py migrate
 ```
 
 If these are not set then local_settings.ini is used instead.
