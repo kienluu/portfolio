@@ -48,7 +48,6 @@ define([
             this.$contentBox = options.$contentBox;
 
             this.groups = new GroupCollection();
-            window.groups = this.groups;
             this.topNavView = new TopNavView({
                 groups: this.groups
             });
