@@ -19,7 +19,8 @@ define([
             'group/:groupname': 'openGroup',
             'group/:groupname/:projectname': 'openProject'
         },
-        openGroup: function (groupName) {
+        openGroup: function (groupName, isOpenProjectCall) {
+            if (isOpenProjectCall==undefined) isOpenProjectCall = false;
             this.runWhenReady(function() {
                 var group = this.topNavView.collectionFindItemViewDictByModelSlug(groupName).model;
                 if (this.currentGroup && this.currentGroup === group) return;
@@ -33,11 +34,17 @@ define([
                     this.prevSidebarView.destroy();
                 }
                 this.trigger('sidebar:created', this.sidebarView);
+
+                // If this root group url then show the project content
+                if (isOpenProjectCall) return;
+
+                this.$contentBox.empty().html(this.currentGroup.get('description'));
+
             });
         },
         openProject: function (groupName, projectName) {
             this.runWhenReady(function() {
-                this.openGroup(groupName);
+                this.openGroup(groupName, true);
                 var project = this.sidebarView.collectionFindItemViewDictByModelSlug(projectName).model;
                 this.$contentBox.html(project.get('content'));
             });
