@@ -30,13 +30,10 @@ class Group(models.Model):
     description = models.CharField(max_length=255)
     projects = models.ManyToManyField(Project, through=ProjectGroupInfo)
 
-    def save(self, force_insert=False, force_update=False, using=None):
-#    def save(self, *args, **kwargs):
-        print 'saving'
+    def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-#        super(Group, self).save(*args, **kwargs)
-        super(Group, self).save(force_insert, force_update, using)
+        super(Group, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return u'%s' % self.name
