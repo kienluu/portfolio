@@ -4,6 +4,11 @@ from portfolio.projects.models import ProjectGroupInfo, Project, Group
 
 
 class ProjectAdmin(admin.ModelAdmin):
+    class Media:
+        js = [
+            '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+            '/static/grappelli/tinymce_setup/tinymce_setup.js',
+    ]
     prepopulated_fields = {"slug": ("title",)}
 
 
