@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from tastypie.api import Api
+from portfolio.pages.api import PageResource
 from portfolio.projects.api import ProjectResource, GroupResource
 
 admin.autodiscover()
@@ -8,6 +9,7 @@ admin.autodiscover()
 api_v1 = Api(api_name='v1')
 api_v1.register(ProjectResource())
 api_v1.register(GroupResource())
+api_v1.register(PageResource())
 
 urlpatterns = patterns('',
     # Examples:

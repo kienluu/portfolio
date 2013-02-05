@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "pages.page", "fields": {"content": "<p>Welcome.</p>", "slug": "index", "title": "Index"}}, {"pk": 2, "model": "pages.page", "fields": {"content": "<p>Contact page.</p>\r\n<p>Enter content here.</p>", "slug": "contact", "title": "Contact"}}]

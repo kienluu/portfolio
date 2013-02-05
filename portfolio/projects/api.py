@@ -1,7 +1,7 @@
 from tastypie import fields
 from tastypie.resources import ModelResource
 from portfolio.projects.models import Project, Group
-from portfolio.projects.serializers import camel_case_json_serializer
+from portfolio.utilities.serializers import camel_case_json_serializer
 
 class ProjectResource(ModelResource):
     class Meta:

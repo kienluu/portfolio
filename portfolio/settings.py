@@ -1,4 +1,4 @@
-from .utils import ConfigParser
+from portfolio.utilities.utils import ConfigParser
 import os
 
 SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     'south',
     'tastypie',
     'portfolio.projects',
+    'portfolio.pages',
 )
 INSTALLED_APPS += tuple(config.getlist('installed_apps', 'append'))
 
