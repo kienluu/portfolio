@@ -5,27 +5,96 @@
 @import "partials/_main";
 @import "partials/_base";
 @import "susy";
+@import "compass/css3";
 
 // Susy Settings
 // 960gs based 1140px grid
+//$total-columns: 12;
+//$column-width: 75px;
+//$gutter-width: 20px;
+//$grid-padding: 10px;
+// 960 grid
 $total-columns: 12;
-$column-width: 75px;
+$column-width: 60px;
 $gutter-width: 20px;
 $grid-padding: 10px;
 
-$container-style: magic;
+$container-style: static;
+// A Break point at 486px to change to mobile mode might be a good idea
+
+/* -------------------------------------------------------------------------*/
+/* Color Scheme */
+
+// One piece theme from kuler.adobe.com
+
+$colorLighten: 5%;
+$colorDarkBlue: lighten(#081640, $colorLighten);
+$colorBlue: lighten(#0f2259, $colorLighten);
+$colorStrongBlue: lighten(#1a6dd9, $colorLighten);
+$colorGrayBlue: lighten(#ccd9d4, $colorLighten);
+$colorGreen: lighten(#0a4001, $colorLighten);
+
+$colorRed: #ff0000;
+$colorStraw: #ffca05;
+
+/* -------------------------------------------------------------------------*/
+/* Other Variables */
+
+$highlightThickness: 5px;
+$highlightColor: $colorStraw;
+$highlightActiveColor: $colorRed;
+
+$dividerColorA: $colorDarkBlue;
+$dividerColorB: lighten($colorDarkBlue, 60%);
+
 
 /* -------------------------------------------------------------------------*/
 /* Layout */
 
+html, body {
+  //background-color: $colorGrayBlue;
+}
+
+html,
+button,
+input,
+select,
+textarea{
+  color: $colorDarkBlue;
+}
+
+a {
+  color: $colorDarkBlue;
+  text-decoration: none;
+}
+
+//.grid {
+//  @include span-columns(3, 9);
+//  &:last-child {
+//    @include omega;
+//  }
+//  background-color: orange;
+//  min-height: 100px;
+//}
+
+.container {
+  @include container;
+  //@include susy-grid-background;
+  //background-color: #add8e6;
+  min-height: 600px;
+}
+
+// Header
 header {
   @include span-columns(12);
   position: relative;
-  background-color: #90ee90;
+  //background-color: #90ee90;
 
   .logo {
     float: left;
     position: relative;
+    font-family: 'Monofett', Helvetica, sans-serif;
+    font-size: 36px;
   }
 }
 
@@ -50,49 +119,86 @@ ul.nav-ul {
     float: left;
     list-style-type: none;
     list-style: none;
-    margin-left: 12px;
-    margin-right: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-left: 1px;
+    margin-right: 1px;
+    padding-top: 9px;
+    border-top: $highlightThickness solid $highlightColor;
     cursor: pointer;
+    font-weight: bolder;
+    a {
+      color: $colorBlue;
+    }
   }
 }
 
-.side-nav ul {
-  margin: 10px;
-  padding: 10px;
-}
 
-footer {
-  @include span-columns(12);
-  background-color: #90ee90;
-  text-align: center;
+// Main Section (sidebar + content-box)
+.divider {
+  height: 1px;
+  background: $dividerColorA;
+  border-bottom: 1px solid $dividerColorB;
 }
-
 .container {
-  @include container;
-  @include susy-grid-background;
-  background-color: #add8e6;
-  min-height: 600px;
+  > .divider {
+    @include span-columns(12);
+  }
 }
+
 
 .main-section {
   @include span-columns(12);
+  padding-top: 10px;
 }
 
-.content-wrapper {
-  @include span-columns(9 omega, 12);
-}
+// Sidebar
 
-.grid {
-  @include span-columns(3, 9);
-  &:last-child {
-    @include omega;
+.side-nav ul {
+  margin: 0;
+  padding: 10px;
+
+  @include border-radius(5px);
+  background: $colorGrayBlue;
+
+  li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding-left: 9px;
+    border-left: $highlightThickness solid $highlightColor;
   }
-  background-color: orange;
-  min-height: 100px;
+
 }
+
 
 .sidebar-wrapper {
   @include span-columns(3, 12);
   min-height: 600px;
-  background-color: orange;
+  //background-color: orange;
+}
+
+// Content Box
+.content-wrapper {
+  @include span-columns(9 omega, 12);
+}
+
+.project-box {
+  p {
+    //@include span-columns(6, 9);
+    max-width:  columns-width(7);
+    img {
+      max-width: 100%;
+      //max-width: percentage(columns-width(9) / columns-width(6));
+      height: auto;
+    }
+  }
+}
+
+// Footer
+footer {
+  @include span-columns(12);
+  background-color: #90ee90;
+  text-align: center;
 }

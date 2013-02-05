@@ -38,7 +38,7 @@ define([
                 // If this root group url then show the project content
                 if (isOpenProjectCall) return;
 
-                this.$contentBox.empty().html(this.currentGroup.get('description'));
+                this.$contentBox.empty().html(_.sprintf('<article class="group-description-box">%s</aricle>', this.currentGroup.get('description')));
 
             });
         },
@@ -46,7 +46,7 @@ define([
             this.runWhenReady(function() {
                 this.openGroup(groupName, true);
                 var project = this.sidebarView.collectionFindItemViewDictByModelSlug(projectName).model;
-                this.$contentBox.html(project.get('content'));
+                this.$contentBox.html(_.sprintf('<article class="project-box">%s</aricle>', project.get('content')));
             });
         },
         initialize: function(options) {
