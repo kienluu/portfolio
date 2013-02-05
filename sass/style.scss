@@ -39,13 +39,15 @@ $colorStraw: #ffca05;
 
 /* -------------------------------------------------------------------------*/
 /* Other Variables */
+$transDuration: 0.4s;
+$transEasing: ease-in-out;
 
 $highlightThickness: 5px;
 $highlightColor: $colorStraw;
 $highlightActiveColor: $colorRed;
 
 $dividerColorA: $colorDarkBlue;
-$dividerColorB: lighten($colorDarkBlue, 60%);
+$dividerColorB: lighten($colorDarkBlue, 55%);
 
 
 /* -------------------------------------------------------------------------*/
@@ -95,6 +97,7 @@ header {
     position: relative;
     font-family: 'Monofett', Helvetica, sans-serif;
     font-size: 36px;
+    margin-top: 3px;
   }
 }
 
@@ -125,10 +128,33 @@ ul.nav-ul {
     margin-right: 1px;
     padding-top: 9px;
     border-top: $highlightThickness solid $highlightColor;
+    opacity: 1.0;
+    @include transition(
+        border-top $transDuration $transEasing,
+        opacity $transDuration $transEasing);
     cursor: pointer;
+    font-size: 18px;
     font-weight: bolder;
     a {
       color: $colorBlue;
+    }
+    &:hover {
+      border-top: $highlightThickness solid $highlightActiveColor;
+      @include transition(
+          border-top $transDuration $transEasing,
+          opacity $transDuration $transEasing);
+      opacity: 1.0 !important;
+    }
+    &:active, &.active {
+      border-top: $highlightThickness solid $highlightActiveColor;
+    }
+  }
+  &:hover {
+    li {
+      opacity: 0.5;
+      @include transition(
+          border-top $transDuration $transEasing,
+          opacity $transDuration $transEasing);
     }
   }
 }
@@ -149,7 +175,7 @@ ul.nav-ul {
 
 .main-section {
   @include span-columns(12);
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 // Sidebar
@@ -158,8 +184,14 @@ ul.nav-ul {
   margin: 0;
   padding: 10px;
 
-  @include border-radius(5px);
-  background: $colorGrayBlue;
+  @include border-radius(6px);
+  background-color: $colorStrongBlue;
+  $_fontColor: $colorGrayBlue;
+  color: $_fontColor;
+  font-weight: normal;
+  a {
+    color: $_fontColor;
+  }
 
   li {
     padding-top: 10px;
@@ -168,6 +200,25 @@ ul.nav-ul {
     margin-bottom: 1px;
     padding-left: 9px;
     border-left: $highlightThickness solid $highlightColor;
+    a {
+      display: inline-block;
+      width: 176px;
+      padding-left: 0;
+      @include transition(padding-left $transDuration $transEasing);
+    }
+    @include transition(border-left $transDuration $transEasing);
+    &:hover {
+      border-left: $highlightThickness solid $highlightActiveColor;
+      @include transition(border-left $transDuration $transEasing);
+      a {
+        padding-left: 10px;
+        @include transition(padding-left $transDuration $transEasing);
+      }
+    }
+    &:active, &.active {
+      a{padding-left: 10px;}
+      border-left: $highlightThickness solid $highlightActiveColor;
+    }
   }
 
 }
