@@ -33,11 +33,17 @@ define([
         // Others
         className: 'transition-view-box',
         currentView: null,
+        initialize: function() {
+            // This must be created here, otherwise all newly created instances
+            // will share the same this.views!
+            this.views = {};
+        },
         // Functions
         removeView: function() {
             this.setView(null);
         },
         setView: function(view) {
+            if (this.views[view.cid]) return view;
             if (this.currentView) {
                 var previousView = this.transitionOutView(this.currentView);
             }
@@ -61,6 +67,7 @@ define([
         },
         transitionIn: transitions.fadeIn,
         removeView: function(view) {
+            delete this.views[view.cid];
             var $holder = this.getHolder(view);
             view.remove();
             $holder.remove();
@@ -69,12 +76,16 @@ define([
                     view.destroy();
                 }
             }
+            this.computeAndSetHeight();
             this.trigger('view:removed', view);
         },
         addView: function(view) {
+            this.views[view.cid] = view;
             var $holder = this.createHolder();
             $holder.html(view.el);
             this.$el.append($holder);
+            this.computeAndSetHeight();
+            view.on('rendered', this.computeAndSetHeight, this);
             this.trigger('view:added', view);
         },
         createHolder: function() {
@@ -82,6 +93,17 @@ define([
         },
         getHolder: function(view) {
             return view.$el.parent();
+        },
+        computeAndSetHeight: function() {
+            // FIXME: If img heights are unknown then we need to run this command
+            // once all images are loaded on the relavant view.
+            // Currently I am making sure the image dimensions are known and set.
+            var tallestView = _.max(this.views, function(view){
+                // Might need to use hasOwnProperty here.
+                return this.getHolder(view).outerHeight();
+            }, this);
+            var maxHeight = this.getHolder(tallestView).outerHeight();
+            this.$el.css('height', maxHeight);
         }
     });
 });

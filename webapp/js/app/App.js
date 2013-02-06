@@ -19,9 +19,11 @@ define(
             initialize: function() {
                 var contentView = new TransitionView();
                 this.$('.content-wrapper').append(contentView.el);
+                var sideView = new TransitionView();
+                this.$('.sidebar-wrapper').append(sideView.el);
                 this.groupRouter = new GroupRouter({
                     $navBox: this.$('.nav-wrapper'),
-                    $sidebarBox: this.$('.sidebar-wrapper'),
+                    sideView: sideView,
                     contentView: contentView
                 });
                 Backbone.history.start();

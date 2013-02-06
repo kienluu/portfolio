@@ -8,13 +8,15 @@ define([
     'app/collections/GroupCollection',
     'app/views/TopNavView',
     'app/views/SidebarView',
-    'app/views/GroupView'
+    'app/views/GroupView',
+    'app/views/ProjectView'
 ], function ($, _, Backbone, HandleBars
     , OnReadyMixin
     , GroupCollection
     , TopNavView
     , SidebarView
     , GroupView
+    , ProjectView
     ) {
     return Backbone.Router.extendWithMixin([OnReadyMixin],{
         routes: {
@@ -31,7 +33,7 @@ define([
                 this.sidebarView = new SidebarView({group: group});
                 this.sidebarView.on('selectableitem:selected', this.onSidebarItemSelected, this);
                 // FIXME: jquery empty remove events.  Will this remove Backbone events?
-                this.$sidebarBox.empty().append(this.sidebarView.$el);
+                this.sideView.setView(this.sidebarView);
                 if (this.prevSidebarView){
                     this.prevSidebarView.destroy();
                 }
@@ -49,12 +51,13 @@ define([
             this.runWhenReady(function() {
                 this.openGroup(groupName, true);
                 var project = this.sidebarView.collectionFindItemViewDictByModelSlug(projectName).model;
-                this.$contentBox.html(_.sprintf('<article class="project-box">%s</aricle>', project.get('content')));
+                var projectView = new ProjectView({project:project});
+                this.contentView.setView(projectView);
             });
         },
         initialize: function(options) {
             this.$navBox = options.$navBox;
-            this.$sidebarBox = options.$sidebarBox;
+            this.sideView = options.sideView;
             this.contentView = options.contentView;
 
             this.groups = new GroupCollection();
