@@ -9,6 +9,7 @@ define([
         className: 'project-content-box',
         render: function() {
             this.$el.html(this.project.get('content'));
+            this.trigger('rendered', this);
         },
         initialize: function(options) {
             this.project = options.project;

@@ -9,6 +9,9 @@
  top: 0; left: 0;
  }
 
+
+    The views passed to a TransitionView should trigger "rendered" for this to function properly
+
  */
 
 define([
@@ -84,8 +87,10 @@ define([
             var $holder = this.createHolder();
             $holder.html(view.el);
             this.$el.append($holder);
-            this.computeAndSetHeight();
-            view.on('rendered', this.computeAndSetHeight, this);
+            // Test: load img with no dimension to check heights change correctly.
+            //view.$el.append($('<img src="http://www.mamamia.com.au/wp-content/uploads/2011/07/mr-tall.jpg?q='+Math.random()+'">'));
+            this.onRender(view);
+            view.on('rendered', this.onRender, this);
             this.trigger('view:added', view);
         },
         createHolder: function() {
@@ -93,6 +98,17 @@ define([
         },
         getHolder: function(view) {
             return view.$el.parent();
+        },
+        onRender: function(view) {
+            // waitForImages does not seem to remove event listeners
+            // http://stackoverflow.com/questions/6033821/do-i-need-to-remove-event-listeners
+            var self = this;
+            view.$el.waitForImages({
+                each: function() {
+                    self.computeAndSetHeight();
+                }
+            });
+            this.computeAndSetHeight();
         },
         computeAndSetHeight: function() {
             // FIXME: If img heights are unknown then we need to run this command

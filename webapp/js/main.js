@@ -15,7 +15,9 @@ require.config({
         // Directory reroute.
         templates: '../templates/',
         // Library paths.
+        // jquery library must use the name jquery unless edit the file.
         jquery: 'lib/jquery/jquery.core',
+        'jquery.waitForImages': 'lib/jquery/jquery.waitforimages',
         'jquery.all': 'lib/jquery/jquery.all',
         underscore: 'lib/underscore/underscore',
         'underscore.core': 'lib/underscore/underscore.core',
@@ -31,6 +33,9 @@ require.config({
     // TODO: Need error handling if scripts do not load.
     waitSeconds: 5,
     shim: {
+        'jquery.waitForImages':{
+            deps: ['jquery']
+        },
         'underscore.core': {
             exports: '_'
         },

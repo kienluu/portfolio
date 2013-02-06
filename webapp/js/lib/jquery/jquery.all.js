@@ -1,6 +1,6 @@
 define([
-    'jquery'
-//    'jquery.core'
+    'jquery',
+    'jquery.waitForImages'
     // Place plugins here
 ], function ($) {
     return $;

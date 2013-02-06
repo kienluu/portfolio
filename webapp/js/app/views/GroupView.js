@@ -9,6 +9,7 @@ define([
         className: 'group-description-box',
         render: function() {
             this.$el.html(this.group.get('description'));
+            this.trigger('rendered', this);
         },
         initialize: function(options) {
             this.group = options.group;
