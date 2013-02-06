@@ -29,10 +29,18 @@ $container-style: static;
 
 $colorLighten: 5%;
 $colorDarkBlue: lighten(#081640, $colorLighten);
+$colorDarkBlue: #212d69;
 $colorBlue: lighten(#0f2259, $colorLighten);
-$colorStrongBlue: lighten(#1a6dd9, $colorLighten);
-$colorGrayBlue: lighten(#ccd9d4, $colorLighten);
+$colorBlue: #003fa3;
+$colorStrongBlue: #1a6dd9; // kuler
+//$colorStrongBlue: #003fa3; lightened kuler
+//$colorStrongBlue: #00c4fb; from one piece site
+//$colorGrayBlue: lighten(#ccd9d4, $colorLighten);
+$colorGrayBlue: #ccd9d4;
+//$colorGrayBlue: white;
 $colorGreen: lighten(#0a4001, $colorLighten);
+$colorLightBrown: #af6434;
+$colorBrown: #653a1d;
 
 $colorRed: #ff0000;
 $colorStraw: #ffca05;
@@ -47,7 +55,9 @@ $highlightColor: $colorStraw;
 $highlightActiveColor: $colorRed;
 
 $dividerColorA: $colorDarkBlue;
+//$dividerColorA: $colorBrown;
 $dividerColorB: lighten($colorDarkBlue, 55%);
+//$dividerColorB: $colorLightBrown;
 
 
 /* -------------------------------------------------------------------------*/
@@ -62,12 +72,13 @@ button,
 input,
 select,
 textarea{
-  color: $colorDarkBlue;
+  color: $colorBlue;
 }
 
 a {
   color: $colorDarkBlue;
   text-decoration: none;
+  cursor: pointer;
 }
 
 //.grid {
@@ -122,11 +133,8 @@ ul.nav-ul {
     float: left;
     list-style-type: none;
     list-style: none;
-    padding-left: 12px;
-    padding-right: 12px;
     margin-left: 1px;
     margin-right: 1px;
-    padding-top: 9px;
     border-top: $highlightThickness solid $highlightColor;
     opacity: 1.0;
     @include transition(
@@ -136,7 +144,12 @@ ul.nav-ul {
     font-size: 18px;
     font-weight: bolder;
     a {
-      color: $colorBlue;
+      color: $colorDarkBlue;
+      display: inline-block;
+      padding-top: 9px;
+      padding-bottom: 9px;
+      padding-left: 12px;
+      padding-right: 12px;
     }
     &:hover {
       border-top: $highlightThickness solid $highlightActiveColor;
@@ -179,11 +192,12 @@ ul.nav-ul {
 }
 
 // Sidebar
-
+.side-nav {
+  width: columns-width(3);
+}
 .side-nav ul {
   margin: 0;
   padding: 10px;
-
   @include border-radius(6px);
   background-color: $colorStrongBlue;
   $_fontColor: $colorGrayBlue;
@@ -194,16 +208,16 @@ ul.nav-ul {
   }
 
   li {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 0;
     margin-top: 1px;
     margin-bottom: 1px;
-    padding-left: 9px;
     border-left: $highlightThickness solid $highlightColor;
     a {
       display: inline-block;
       width: 176px;
-      padding-left: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 9px;
       @include transition(padding-left $transDuration $transEasing);
     }
     @include transition(border-left $transDuration $transEasing);
@@ -211,12 +225,12 @@ ul.nav-ul {
       border-left: $highlightThickness solid $highlightActiveColor;
       @include transition(border-left $transDuration $transEasing);
       a {
-        padding-left: 10px;
+        padding-left: 19px;
         @include transition(padding-left $transDuration $transEasing);
       }
     }
     &:active, &.active {
-      a{padding-left: 10px;}
+      a{padding-left: 19px;}
       border-left: $highlightThickness solid $highlightActiveColor;
     }
   }
@@ -245,7 +259,7 @@ ul.nav-ul {
   top: 0; left: 0;
 }
 
-.project-box {
+.project-content-box {
   p {
     //@include span-columns(6, 9);
     max-width:  columns-width(7);
@@ -260,6 +274,6 @@ ul.nav-ul {
 // Footer
 footer {
   @include span-columns(12);
-  background-color: #90ee90;
+  //background-color: #90ee90;
   text-align: center;
 }
