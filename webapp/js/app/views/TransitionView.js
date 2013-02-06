@@ -15,9 +15,11 @@ define([
     'jquery.all',
     'underscore',
     'backbone',
-    'handlebars'
-    // Template
+    'handlebars',
+    // App
+    'app/views/transitionViewTransitions'
 ], function ($, _, Backbone, HandleBars
+    , transitions
     ) {
     /*
         If you want to use or plan to use transitions when swapping views use
@@ -27,42 +29,37 @@ define([
     return Backbone.View.extend({
         // Options
         destroyViewOnRemove: true,
+        fadeDuration: 400,
         // Others
         className: 'transition-view-box',
         currentView: null,
         // Functions
+        removeView: function() {
+            this.setView(null);
+        },
         setView: function(view) {
-            var previousView = this.transitionOutView(this.currentView);
+            if (this.currentView) {
+                var previousView = this.transitionOutView(this.currentView);
+            }
             this.currentView = view;
-            this.transitionInView(view, previousView);
+            if (view){
+                this.transitionInView(view, previousView);
+            }
             return view;
         },
         transitionOutView: function(view) {
-            if (!view) return null;
             this.transitionOut(view);
             view.once('transitionout:finnished', function(view){
                 this.removeView(view);
             }, this);
         },
-        transitionOut: function(view) {
-            // Note: jquery animations will override the current animation.
-            // So as a note to myself to becareful if I use another tween library.
-            // This is especially true If the in transitions are delayed.
-            view.$el.fadeOut('slow', function(){
-                view.trigger('transitionout:finnished', view);
-            });
-        },
+        transitionOut: transitions.fadeOut,
         transitionInView: function(view, previousView) {
             // previousView will trigger "transitionout:finnished" when its out transition is finnished.
             this.addView(view);
             this.transitionIn(view, previousView);
         },
-        transitionIn: function(view, previousView) {
-            // previousView will be null if there are no previous views.
-            view.$el.fadeIn('slow', function(){
-                view.trigger('transitionin:finnished', view);
-            });
-        },
+        transitionIn: transitions.fadeIn,
         removeView: function(view) {
             var $holder = this.getHolder(view);
             view.remove();
