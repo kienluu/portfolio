@@ -5,16 +5,14 @@ define([
     'handlebars',
     // App
     'app/utilities/OnReadyMixin',
-    'app/collections/GroupCollection',
+    'app/collections/PageCollection',
     'app/views/TopNavView',
-    'app/views/SidebarView',
-    'app/views/GroupView'
+    'app/views/SidebarView'
 ], function ($, _, Backbone, HandleBars
     , OnReadyMixin
     , GroupCollection
     , TopNavView
     , SidebarView
-    , GroupView
     ) {
     return Backbone.Router.extendWithMixin([OnReadyMixin],{
         routes: {
@@ -40,8 +38,7 @@ define([
                 // If this root group url then show the project content
                 if (isOpenProjectCall) return;
 
-                var view = new GroupView({group: this.currentGroup});
-                this.contentView.setView(view);
+                this.$contentBox.empty().html(_.sprintf('<article class="group-description-box">%s</aricle>', this.currentGroup.get('description')));
 
             });
         },
@@ -55,7 +52,7 @@ define([
         initialize: function(options) {
             this.$navBox = options.$navBox;
             this.$sidebarBox = options.$sidebarBox;
-            this.contentView = options.contentView;
+            this.$contentBox = options.$contentBox;
 
             this.groups = new GroupCollection();
             this.topNavView = new TopNavView({
@@ -68,12 +65,6 @@ define([
                 this.$navBox.append(this.topNavView.$el);
                 this.setReady();
             }, this);
-        },
-        onNavItemSelected: function(selectedItemView) {
-            // Change the sidebar here.
-//            this.navigate('group/'+selectedItemView.getModel().getSlug(), {trigger:true, replace:true});
-        },
-        onSidebarItemSelected: function(selectedItemView) {
         }
     });
 });
