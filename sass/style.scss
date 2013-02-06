@@ -41,6 +41,7 @@ $colorGrayBlue: #ccd9d4;
 $colorGreen: lighten(#0a4001, $colorLighten);
 $colorLightBrown: #af6434;
 $colorBrown: #653a1d;
+$colorWhiteHintedBrown: #f4eae4;
 
 $colorRed: #ff0000;
 $colorStraw: #ffca05;
@@ -64,7 +65,7 @@ $dividerColorB: lighten($colorDarkBlue, 55%);
 /* Layout */
 
 html, body {
-  //background-color: $colorGrayBlue;
+  background-color: $colorWhiteHintedBrown;
 }
 
 html,
@@ -98,6 +99,12 @@ a {
 }
 
 // Header
+.header-background {
+  background: $colorGrayBlue;
+  height: 53px;
+  width: 100%;
+  position: absolute;
+}
 header {
   @include span-columns(12);
   position: relative;
@@ -272,8 +279,16 @@ ul.nav-ul {
 }
 
 // Footer
+.divider.footer{
+  margin-top: 20px;
+  height: 0px;
+}
 footer {
   @include span-columns(12);
   //background-color: #90ee90;
   text-align: center;
+  padding: 40px 0;
+  font-style: italic;
+  color: $colorDarkBlue;
+  text-shadow: 1px 1px $colorGrayBlue;
 }
