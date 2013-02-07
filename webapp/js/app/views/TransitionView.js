@@ -63,7 +63,8 @@ define([
                 // Call in a seperate thread so that other transitionout:finnished
                 // event listeners gets a chance to run
                 var self = this;
-                view.remove();
+                // Hide view.$el so that removeView can still remove the viewHolder which just looks for $el's parent
+                view.$el.hide();
                 setTimeout(function(){
                     self.removeView(view);
                 }, 1);
