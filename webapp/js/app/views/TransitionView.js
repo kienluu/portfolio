@@ -66,16 +66,16 @@ define([
                 view.remove();
                 setTimeout(function(){
                     self.removeView(view);
-                }, 1000);
+                }, 1);
             }, this);
         },
-        transitionOut: transitions.fadeOut,
+        transitionOut: transitions.sFadeOut,
         transitionInView: function(view, previousView) {
             // previousView will trigger "transitionout:finnished" when its out transition is finnished.
             this.addView(view);
             this.transitionIn(view, previousView);
         },
-        transitionIn: transitions.fadeIn,
+        transitionIn: transitions.sFadeIn,
         removeView: function(view) {
             delete this.views[view.cid];
             var $holder = this.getHolder(view);

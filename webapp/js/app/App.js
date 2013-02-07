@@ -20,9 +20,10 @@ define(
             el: '#app-body',
             initialize: function() {
                 var contentView = new TransitionView();
+                contentView.transitionOut = transitionViewTransition.fadeOut;
+                contentView.transitionIn = transitionViewTransition.fadeIn;
                 this.$('.content-wrapper').append(contentView.el);
-                var sideView = new TransitionView()
-                sideView.duration = 1000;
+                var sideView = new TransitionView();
                 sideView.transitionOut = transitionViewTransition.slideUp;
                 sideView.transitionIn = transitionViewTransition.slideDown;
                 this.$('.sidebar-wrapper').append(sideView.el);
