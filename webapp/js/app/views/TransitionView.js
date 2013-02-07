@@ -32,7 +32,7 @@ define([
     return Backbone.View.extend({
         // Options
         destroyViewOnRemove: true,
-        fadeDuration: 400,
+        duration: 400,
         // Others
         className: 'transition-view-box',
         currentView: null,
@@ -48,7 +48,8 @@ define([
         setView: function(view) {
             if (this.views[view.cid]) return view;
             if (this.currentView) {
-                var previousView = this.transitionOutView(this.currentView);
+                var previousView = this.currentView;
+                this.transitionOutView(previousView);
             }
             this.currentView = view;
             if (view){
@@ -59,7 +60,13 @@ define([
         transitionOutView: function(view) {
             this.transitionOut(view);
             view.once('transitionout:finnished', function(view){
-                this.removeView(view);
+                // Call in a seperate thread so that other transitionout:finnished
+                // event listeners gets a chance to run
+                var self = this;
+                view.remove();
+                setTimeout(function(){
+                    self.removeView(view);
+                }, 1000);
             }, this);
         },
         transitionOut: transitions.fadeOut,
@@ -119,7 +126,7 @@ define([
                 return this.getHolder(view).outerHeight();
             }, this);
             var maxHeight = this.getHolder(tallestView).outerHeight();
-            this.$el.css('height', maxHeight);
+//            this.$el.css('height', maxHeight);
         }
     });
 });

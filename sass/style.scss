@@ -171,7 +171,7 @@ ul.nav-ul {
   }
   &:hover {
     li {
-      opacity: 0.5;
+      opacity: 0.4;
       @include transition(
           border-top $transDuration $transEasing,
           opacity $transDuration $transEasing);
@@ -282,6 +282,7 @@ ul.nav-ul {
 .divider.footer{
   margin-top: 20px;
   height: 0px;
+  border-bottom: 1px solid $colorGrayBlue;
 }
 footer {
   @include span-columns(12);

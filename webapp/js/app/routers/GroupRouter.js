@@ -34,9 +34,6 @@ define([
                 this.sidebarView.on('selectableitem:selected', this.onSidebarItemSelected, this);
                 // FIXME: jquery empty remove events.  Will this remove Backbone events?
                 this.sideView.setView(this.sidebarView);
-                if (this.prevSidebarView){
-                    this.prevSidebarView.destroy();
-                }
                 this.trigger('sidebar:created', this.sidebarView);
 
                 // If this root group url then show the project content
