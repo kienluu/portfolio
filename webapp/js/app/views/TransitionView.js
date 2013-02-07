@@ -127,7 +127,7 @@ define([
                 return this.getHolder(view).outerHeight();
             }, this);
             var maxHeight = this.getHolder(tallestView).outerHeight();
-//            this.$el.css('height', maxHeight);
+            this.$el.css('height', maxHeight);
         }
     });
 });
