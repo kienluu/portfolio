@@ -65,7 +65,7 @@ define([
         },
         collectionAddItem: function(model) {
             // Create a TopNavItemView and add it to the view
-            var ItemViewClass = this.getCollectionItemViewClass();
+            var ItemViewClass = this.getCollectionItemViewClass(model);
             var itemView = new ItemViewClass(this.getCollectionItemViewOptions(model));
             var itemViewDict = {view:itemView, model: model};
             this.itemViewDictList.push(itemViewDict);

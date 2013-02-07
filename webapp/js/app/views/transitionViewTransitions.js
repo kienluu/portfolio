@@ -87,6 +87,9 @@ define([
                         self.$transitionInBox = null;
                         view.trigger('transitionin:finnished', view);
                     }
+//                   ,step: function(now, fx) {
+//                        console.log(fx.prop + ': ' + now);
+//                    }
                 };
                 var argumentList = [];
                 if (animateProperties){

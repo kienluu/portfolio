@@ -7,7 +7,12 @@ define([
     'text!app/templates/TopNavTpl.html',
     // App
     'app/collections/GroupCollection',
-    'app/views/TopNavItemView',
+    'app/models/GroupModel',
+    'app/views/GroupNavItemView',
+    'app/collections/PageCollection',
+    'app/models/PageModel',
+    'app/views/PageNavItemView',
+    'app/models/topNavViewModelMethodsMap',
     'app/views/SelectableItemParentMixin',
     'app/views/CollectionViewMixin',
     'app/views/CollectionViewFindByModelMixin'
@@ -15,16 +20,23 @@ define([
 ], function ($, _, Backbone, HandleBars
         , topNavViewHtml
         , GroupCollection
-        , TopNavItemView
+        , GroupModel
+        , GroupNavItemView
+        , PageCollection
+        , PageModel
+        , PageNavItemView
+        , topNavViewModelMethodsMap
         , SelectableItemParentMixin
         , CollectionViewMixin
         , CollectionViewFindByModelMixin
     ) {
+
     return Backbone.View.extendWithMixin([SelectableItemParentMixin, CollectionViewMixin, CollectionViewFindByModelMixin], {
         initialize: function(options) {
-            assert.ok(options.groups);
+            assert.ok(options.collection);
+            // This collection should not have a fetch function as it will consist of mixed classes
+            this.collection = options.collection;
 
-            this.groups = options.groups;
             /* Use this to see what kind of Events gets called
             this.groups.on('all', function(event, object, xhr){
                 console.log(event);
@@ -47,13 +59,13 @@ define([
         },
         // CollectionViewMixin methods
         getCollection: function () {
-            return this.groups;
+            return this.collection;
         },
-        getCollectionItemViewClass: function () {
-            return TopNavItemView;
+        getCollectionItemViewClass: function (model) {
+            return topNavViewModelMethodsMap[model.constructor.classHash()](model, this).getCollectionItemViewClass();
         },
         getCollectionItemViewOptions: function (model) {
-            return { group: model };
+            return topNavViewModelMethodsMap[model.constructor.classHash()](model, this).getCollectionItemViewOptions();
         },
         collectionAppendItemView: function (itemView) {
             this.$ul.append(itemView.$el);
@@ -64,7 +76,7 @@ define([
         },
         // CollectionViewFindByModelMixin methods
         getCollectionItemViewModelAttrName: function(){
-            return 'group';
+            return 'getModel';
         },
 
         destroy: function () {

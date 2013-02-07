@@ -4,6 +4,7 @@ define([
     'backbone',
     'handlebars'
 ], function ($, _, Backbone, HandleBars) {
+
     return Backbone.RelationalModel.extend({
         defaults: {
             title: "",
@@ -19,7 +20,7 @@ define([
     }, {
         // CLASS PROPERTIES
         classHash: function() {
-            return 'app.models.ProjectModel';
+            return 'app.models.PageModel';
         }
     });
 });

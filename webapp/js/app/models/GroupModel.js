@@ -8,6 +8,7 @@ define([
     'app/collections/ProjectCollection'
 ], function ($, _, Backbone, HandleBars,
         ProjectModel, ProjectCollection) {
+
     return Backbone.RelationalModel.extend({
         defaults: {
             name: "",
@@ -27,6 +28,14 @@ define([
         getSlug: function () {
             // This will be the name used in the backbone router.
             return this.get('slug');
+        },
+        classHash: function () {
+            this.constructor.classHash();
+        }
+    }, {
+    // CLASS PROPERTIES
+        classHash: function() {
+            return 'app.models.GroupModel';
         }
     });
 });

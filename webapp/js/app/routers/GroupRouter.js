@@ -59,7 +59,7 @@ define([
 
             this.groups = new GroupCollection();
             this.topNavView = new TopNavView({
-                groups: this.groups
+                collection: this.groups
             });
             this.topNavView.on('selectableitem:selected', this.onNavItemSelected, this);
             this.groups.fetch();
