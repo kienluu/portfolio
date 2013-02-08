@@ -56,15 +56,11 @@ define([
             this.$navBox = options.$navBox;
             this.sideView = options.sideView;
             this.contentView = options.contentView;
+            this.topNavView = options.topNavView;
 
-            this.groups = new GroupCollection();
-            this.topNavView = new TopNavView({
-                collection: this.groups
-            });
             this.topNavView.on('selectableitem:selected', this.onNavItemSelected, this);
-            this.groups.fetch();
 
-            this.groups.once('reset', function(){
+            this.topNavView.collection.once('reset', function(){
                 this.$navBox.append(this.topNavView.$el);
                 this.setReady();
             }, this);

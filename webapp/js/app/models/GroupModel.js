@@ -25,6 +25,7 @@ define([
                 includeInJSON: 'id'
             }
         }],
+        idAttribute: 'slug',
         getSlug: function () {
             // This will be the name used in the backbone router.
             return this.get('slug');

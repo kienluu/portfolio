@@ -59,8 +59,8 @@ define([
         collectionRemoveItem: function(model, collection) {
             var removeIndex = this.getCollectionItemViewDictIndexFromModel(model);
             if (removeIndex === undefined) return;
-            var itemViewDict = this.itemViewDictList.splice(removeIndex, 1);
-
+            var itemViewDict = this.itemViewDictList.splice(removeIndex, 1)[0];
+            itemViewDict.view.remove(); // Should we remove listeners here?
             this.trigger('collectionview:removeitem', itemViewDict);
         },
         collectionAddItem: function(model) {
@@ -72,7 +72,7 @@ define([
             this.collectionAppendItemView(itemView);
             this.trigger('collectionview:additem', itemViewDict);
             /*
-            TODO: Handle sorting of views.
+            TODO: Handle sorting of views.  Currently views are just appended as they are added
              */
         },
         collectionAppendItemView: function (itemView) {
