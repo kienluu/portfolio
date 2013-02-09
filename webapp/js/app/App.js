@@ -5,6 +5,7 @@ define(
         'backbone',
         // App
         'app/collections/PageCollection',
+        'app/routers/PageRouter',
         'app/collections/GroupCollection',
         'app/routers/GroupRouter',
         'app/views/TransitionView',
@@ -16,6 +17,7 @@ define(
     ],
     function($, _, Backbone
         , PageCollection
+        , PageRouter
         , GroupCollection
         , GroupRouter
         , TransitionView
@@ -79,6 +81,8 @@ define(
                     contentView: contentView,
                     topNavView: topNavView
                 });
+                this.pageRouter = new PageRouter({
+                })
                 Backbone.history.start();
 
             }

@@ -26,7 +26,9 @@ define([
         openGroup: function (groupName, isOpenProjectCall) {
             if (isOpenProjectCall==undefined) isOpenProjectCall = false;
             this.runWhenReady(function() {
-                var group = this.topNavView.collectionFindItemViewDictByModelSlug(groupName).model;
+                var itemViewDict = this.topNavView.collectionFindItemViewDictByModelSlug(groupName);
+                this.topNavView.setActiveView(itemViewDict.view);
+                var group = itemViewDict.model;
                 if (this.currentGroup && this.currentGroup === group) return;
                 this.currentGroup = group;
                 this.prevSidebarView = this.sidebarView;
@@ -47,7 +49,9 @@ define([
         openProject: function (groupName, projectName) {
             this.runWhenReady(function() {
                 this.openGroup(groupName, true);
-                var project = this.sidebarView.collectionFindItemViewDictByModelSlug(projectName).model;
+                var itemViewDict = this.sidebarView.collectionFindItemViewDictByModelSlug(projectName);
+                this.sidebarView.setActiveView(itemViewDict.view);
+                var project = itemViewDict.model;
                 var projectView = new ProjectView({project:project});
                 this.contentView.setView(projectView);
             });

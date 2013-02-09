@@ -18,9 +18,9 @@ define([
         routes: {
         },
         initialize: function(options) {
-            this.$navBox = options.$navBox;
-            this.$sidebarBox = options.$sidebarBox;
-            this.$contentBox = options.$contentBox;
+            this.on('all', function(event, two, three, four){
+                console.log('PageRouter: '+event);
+            });
         }
     });
 });

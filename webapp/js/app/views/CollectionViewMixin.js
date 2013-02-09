@@ -5,6 +5,8 @@ define([
     'handlebars'
 ], function ($, _, Backbone, HandleBars) {
     return {
+        // TODO: Might be worth refactoring out itemViewDictList to just view list and implement a this.getViewModel(view) to get the model instead.
+
         itemViewDictList: [],
         initCollectionView: function () {
             var collection = this.getCollection();
@@ -71,9 +73,7 @@ define([
             this.itemViewDictList.push(itemViewDict);
             this.collectionAppendItemView(itemView);
             this.trigger('collectionview:additem', itemViewDict);
-            /*
-            TODO: Handle sorting of views.  Currently views are just appended as they are added
-             */
+            // TODO: Handle sorting of views.  Currently views are just appended as they are added
         },
         collectionAppendItemView: function (itemView) {
             this.$el.append(itemView.$el);

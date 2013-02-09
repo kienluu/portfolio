@@ -18,6 +18,12 @@ define([
             }, this);
             // Retrigger event.
             this.trigger('selectableitem:selected', selectedItem);
+        },
+        setActiveView: function(itemView) {
+            _.each(this.itemViewDictList, function(itemViewDict) {
+                itemViewDict.view.setIsActive(false);
+            },this);
+            itemView.setIsActive(true);
         }
     };
 });
