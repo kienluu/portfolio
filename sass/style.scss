@@ -237,7 +237,7 @@ ul.nav-ul {
       }
     }
     &:active, &.active {
-      a{padding-left: 19px;}
+      //a{padding-left: 19px;}
       border-left: $highlightThickness solid $highlightActiveColor;
     }
   }
