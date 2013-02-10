@@ -8,7 +8,7 @@
  position: absolute;
  top: 0; left: 0;
  }
-
+ // Maybe these styles will not be needed in the transition where only one view can be seen at a time.  There should be a setting to turn off the height computations for such scenarios.
 
     The views passed to a TransitionView should trigger "rendered" for this to function properly
 
@@ -46,7 +46,7 @@ define([
             this.setView(null);
         },
         setView: function(view) {
-            if (this.views[view.cid]) return view;
+            if (view && this.views[view.cid]) return view;
             if (this.currentView) {
                 var previousView = this.currentView;
                 this.transitionOutView(previousView);
@@ -126,7 +126,7 @@ define([
                 // Might need to use hasOwnProperty here.
                 return this.getHolder(view).outerHeight();
             }, this);
-            var maxHeight = this.getHolder(tallestView).outerHeight();
+            var maxHeight = tallestView === -Infinity? 0 : this.getHolder(tallestView).outerHeight();
             this.$el.css('height', maxHeight);
         }
     });

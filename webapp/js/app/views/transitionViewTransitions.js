@@ -52,8 +52,10 @@ define([
                     complete: function(){
                         self.$transitionOutBox = null;
                         view.trigger('transitionout:finnished', view);
-                        self.transitionIn(self.waitingInView);
-                        self.waitingInView = null;
+                        if (self.waitingInView){
+                            self.transitionIn(self.waitingInView);
+                            self.waitingInView = null;
+                        }
                     }
                 };
                 var argumentList = [];

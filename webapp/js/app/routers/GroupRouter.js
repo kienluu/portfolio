@@ -27,10 +27,11 @@ define([
             if (isOpenProjectCall==undefined) isOpenProjectCall = false;
             this.runWhenReady(function() {
                 var itemViewDict = this.topNavView.collectionFindItemViewDictByModelSlug(groupName);
+                // Do not update sidebar or display group description of this menu nav is the current active one.
+                if (this.topNavView.lastActiveView === itemViewDict.view) return;
+
                 this.topNavView.setActiveView(itemViewDict.view);
                 var group = itemViewDict.model;
-                if (this.currentGroup && this.currentGroup === group) return;
-                this.currentGroup = group;
                 this.prevSidebarView = this.sidebarView;
                 this.sidebarView = new SidebarView({group: group});
                 this.sidebarView.on('selectableitem:selected', this.onSidebarItemSelected, this);
@@ -41,7 +42,7 @@ define([
                 // If this root group url then show the project content
                 if (isOpenProjectCall) return;
 
-                var view = new GroupView({group: this.currentGroup});
+                var view = new GroupView({group: group});
                 this.contentView.setView(view);
 
             });
@@ -63,11 +64,9 @@ define([
             this.topNavView = options.topNavView;
 
             this.topNavView.on('selectableitem:selected', this.onNavItemSelected, this);
-
             this.topNavView.collection.once('reset', function(){
-                this.$navBox.append(this.topNavView.$el);
                 this.setReady();
-            }, this);
+            },this);
         },
         onNavItemSelected: function(selectedItemView) {
             // Change the sidebar here.

@@ -74,15 +74,19 @@ define(
 
                 pages.fetch();
                 groups.fetch();
-
+                this.$('.nav-wrapper').append(topNavView.$el);
+                // Backbone pushes routes into the beginning of an array for testing.  The latest pushed routes has priority.  So the PageRouter which takes all routes must go first otherwise other routes will not have a chance.
+                this.pageRouter = new PageRouter({
+                    sideView: sideView,
+                    contentView: contentView,
+                    topNavView: topNavView,
+                    pageCollection: pages
+                });
                 this.groupRouter = new GroupRouter({
-                    $navBox: this.$('.nav-wrapper'),
                     sideView: sideView,
                     contentView: contentView,
                     topNavView: topNavView
                 });
-                this.pageRouter = new PageRouter({
-                })
                 Backbone.history.start();
 
             }
