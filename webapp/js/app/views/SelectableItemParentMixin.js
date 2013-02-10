@@ -24,6 +24,7 @@ define([
             _.each(this.getSelectableItemViews(), function(view) {
                 view.setIsActive(false);
             },this);
+            if (!targetView) return;
             targetView.setIsActive(true);
         }
     };

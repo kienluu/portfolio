@@ -40,12 +40,20 @@ define([
         openPage: function (pageName) {
             // FIXME: Potential bug, if there is a change in url after this from another function, than this might get called after that change in url.
             this.runWhenReady(function() {
-                var itemViewDict = this.topNavView.collectionFindItemViewDictByModelSlug(pageName);
                 // Do not update sidebar or display group description of this menu nav is the current active one.
-                if (this.topNavView.lastActiveView === itemViewDict.view) return;
 
-                this.topNavView.setActiveView(itemViewDict.view);
-                var page = itemViewDict.model;
+                if (pageName != 'index') {
+                    var itemViewDict = this.topNavView.collectionFindItemViewDictByModelSlug(pageName);
+                    if (this.topNavView.lastActiveView === itemViewDict.view) return;
+                    this.topNavView.setActiveView(itemViewDict.view);
+                    var page = itemViewDict.model;
+                }
+                else {
+                    this.topNavView.setActiveView(null);
+                    var page = _.find(this.pageCollection.models, function(page){
+                        return page.getSlug()===pageName;
+                    }, this);
+                }
                 this.prevSidebarView = this.sidebarView;
                 this.sideView.setView(null);
 
