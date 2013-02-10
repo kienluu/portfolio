@@ -71,6 +71,11 @@ define(
                 var pages = new PageCollection();
 
                 var topNavView = createTopNavView(pages, groups);
+                topNavView.collection.once('reset change', function() {
+                    this.$('.content-wrapper').removeClass('hidden');
+                    this.$('.sidebar-wrapper').removeClass('hidden');
+                    this.$('.loader-box').remove();
+                }, this);
 
                 pages.fetch();
                 groups.fetch();

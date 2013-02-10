@@ -244,16 +244,25 @@ ul.nav-ul {
 
 }
 
+$minContentHeight: 300px;
 
 .sidebar-wrapper {
   @include span-columns(3, 12);
-  min-height: 300px;
+  min-height: $minContentHeight;
   //background-color: orange;
 }
 
 // Content Box
 .content-wrapper {
   @include span-columns(9 omega, 12);
+}
+
+.loader-box {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: columns-width(12);
+  height: $minContentHeight;
 }
 
 // For TransitionView.js
