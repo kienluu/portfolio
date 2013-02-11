@@ -140,6 +140,18 @@ ul.nav-ul {
     float: left;
     list-style-type: none;
     list-style: none;
+  }
+  li.divider {
+    width: 2px;
+    border-left: 1px solid $colorDarkBlue;
+    border-right: 1px solid $colorDarkBlue;
+    height: 26px;
+    margin: 13px 0px;
+    opacity: 1.0;
+    @include transition(
+        opacity $transDuration $transEasing);
+  }
+  li.top-nav-item {
     margin-left: 1px;
     margin-right: 1px;
     border-top: $highlightThickness solid $highlightColor;
@@ -181,7 +193,7 @@ ul.nav-ul {
 
 
 // Main Section (sidebar + content-box)
-.divider {
+div.divider {
   height: 1px;
   background: $dividerColorA;
   border-bottom: 1px solid $dividerColorB;

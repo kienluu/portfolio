@@ -7,13 +7,17 @@ define([
     'app/views/GroupNavItemView',
     'app/models/GroupModel',
     'app/views/PageNavItemView',
-    'app/models/PageModel'
+    'app/models/PageModel',
+    'app/views/TopNavDividerItemView',
+    'app/models/DividerModel'
 
 ], function($, _, Backbone, HandleBars
     , GroupNavItemView
     , GroupModel
     , PageNavItemView
     , PageModel
+    , TopNavDividerItemView
+    , DividerModel
     ) {
     var pageModelMethods = function (model, topNavView) {
         return {
@@ -36,9 +40,22 @@ define([
             }
         };
     };
+
+    var dividerModelMethods = function (model, topNavView) {
+        return {
+            getCollectionItemViewClass: function() {
+                return TopNavDividerItemView
+            },
+            getCollectionItemViewOptions: function() {
+                return {model: model};
+            }
+        };
+    };
+
     map = {}
     map[PageModel.classHash()] = pageModelMethods;
     map[GroupModel.classHash()] = groupModelMethods;
+    map[DividerModel.classHash()] = dividerModelMethods;
     return map;
 
 });

@@ -8,6 +8,7 @@ define(
         'app/routers/PageRouter',
         'app/collections/GroupCollection',
         'app/routers/GroupRouter',
+        'app/models/DividerModel',
         'app/views/TransitionView',
         'app/views/transitionViewTransitions',
         'app/views/TopNavView',
@@ -20,6 +21,7 @@ define(
         , PageRouter
         , GroupCollection
         , GroupRouter
+        , DividerModel
         , TransitionView
         , transitionViewTransition
         , TopNavView
@@ -30,7 +32,7 @@ define(
             collection.fetch = function() {
                 // This class will contain a mixture of model types and has no api endpoint
                 throw "Function not supported";
-            }
+            };
             var topNavView = new TopNavView({
                 collection: collection
             });
@@ -39,7 +41,8 @@ define(
                 if (!(pagesReady && groupsReady)){
                     return;
                 }
-                var navModels =  groups.models.concat([pages.get('contact')]);
+                var navModels =  groups.models.concat(new DividerModel({appendClass:"last"}), [pages.get('contact')]);
+                navModels.unshift(new DividerModel({appendClass:"first"}));
                 navModels.unshift(pages.get('index'));
                 collection.reset(navModels);
             };

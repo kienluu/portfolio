@@ -22,7 +22,8 @@ define([
         setActiveView: function(targetView) {
             this.lastActiveView = targetView;
             _.each(this.getSelectableItemViews(), function(view) {
-                view.setIsActive(false);
+                // Ignore views such as dividers
+                if (view.setIsActive) view.setIsActive(false);
             },this);
             if (!targetView) return;
             targetView.setIsActive(true);
