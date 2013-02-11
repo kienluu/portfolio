@@ -39,7 +39,9 @@ define(
                 if (!(pagesReady && groupsReady)){
                     return;
                 }
-                collection.reset(groups.models.concat([pages.get('contact')]));
+                var navModels =  groups.models.concat([pages.get('contact')]);
+                navModels.unshift(pages.get('index'));
+                collection.reset(navModels);
             };
 
             var pagesReady = false, groupsReady = false;
@@ -87,13 +89,17 @@ define(
                     topNavView: topNavView,
                     pageCollection: pages
                 });
+                this.pageRouter.on('pagechange', this.onRouteChange, this);
                 this.groupRouter = new GroupRouter({
                     sideView: sideView,
                     contentView: contentView,
                     topNavView: topNavView
                 });
+                this.groupRouter.on('pagechange', this.onRouteChange, this);
                 Backbone.history.start();
-
+            },
+            onRouteChange: function(routeHash) {
+                _gaq.push(['_trackPageview', '/' + routeHash]);
             }
         });
     }

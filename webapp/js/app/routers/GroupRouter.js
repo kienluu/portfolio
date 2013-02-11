@@ -44,7 +44,7 @@ define([
 
                 var view = new GroupView({group: group});
                 this.contentView.setView(view);
-
+                this.trigger('pagechange', groupName);
             });
         },
         openProject: function (groupName, projectName) {
@@ -55,6 +55,7 @@ define([
                 var project = itemViewDict.model;
                 var projectView = new ProjectView({project:project});
                 this.contentView.setView(projectView);
+                this.trigger('pagechange', _.sprintf('%s/%s', groupName, projectName));
             });
         },
         initialize: function(options) {

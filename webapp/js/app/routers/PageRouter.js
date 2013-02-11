@@ -19,7 +19,8 @@ define([
     return Backbone.Router.extendWithMixin([OnReadyMixin],{
         // The pages slugs must be in here so that they openPage command can be delayed until the page slugs (and content) are ready.  Or page will be missed out when starting the url on that page
         routes: {
-            ':pageName': 'openPage'
+            ':pageName': 'openPage',
+            '*other': 'defaultAction'
         },
         initialize: function(options) {
             this.sideView = options.sideView;
@@ -41,8 +42,16 @@ define([
             // FIXME: Potential bug, if there is a change in url after this from another function, than this might get called after that change in url.
             this.runWhenReady(function() {
                 // Do not update sidebar or display group description of this menu nav is the current active one.
-
-                if (pageName != 'index') {
+                var model = _.find(this.pageCollection.models, function(page){
+                    return page.getSlug() === pageName;
+                }, this);
+                // Default to show index page on unknown pages
+                if (!model){
+                    pageName = 'index';
+                }
+                this.trigger('pagechange', pageName);
+                var pageInTopNavView = true; // Currently all true.  Include condition here if otherwise.
+                if (pageInTopNavView) {
                     var itemViewDict = this.topNavView.collectionFindItemViewDictByModelSlug(pageName);
                     if (this.topNavView.lastActiveView === itemViewDict.view) return;
                     this.topNavView.setActiveView(itemViewDict.view);
@@ -61,6 +70,9 @@ define([
                 this.contentView.setView(view);
 
             });
+        },
+        defaultAction: function() {
+            this.openPage('index');
         }
     });
 });

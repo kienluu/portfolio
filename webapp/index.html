@@ -11,13 +11,11 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-    <link href='http://fonts.googleapis.com/css?family=Monofett|Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Monofett|Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style-compiled.css">
     <script src="js/modernizr-2.6.2.min.js"></script>
     <script src="js/assert.js"></script>
     <script src="js/plugins.js"></script>
-    <!--<script data-main="js/main.js" src="js/lib/requirejs/require.js"></script>-->
     <script src="js/main-optimized.js"></script>
 </head>
 <body>
@@ -25,20 +23,22 @@
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 <![endif]-->
 
+<div class="header-background"></div>
 <div class="wrapper container" id="app-body">
     <header>
-        <div class="logo"><a href="/">Kien Luu</a></div>
         <nav class="nav-wrapper"><!--Nav goes here--></nav>
+        <div class="logo"><a href="#index">Kien Luu</a></div>
     </header>
+    <!--<div class="divider"></div>-->
     <div class="main-section">
-        <nav class="sidebar-wrapper"><!-- Sidebar goes here --></nav>
-        <div class="content-wrapper">
-            <!-- Content goes here -->
-        </div>
+        <nav class="sidebar-wrapper hidden"></nav>
+        <div class="content-wrapper hidden"></div>
+        <div class="loader-box"><img src="/images/ajax-loader.gif" alt=""></div>
     </div>
+    <div class="divider footer"></div>
     <footer>
         <div class="footer-wrapper">
-            All rights reserved kienluu.
+            © 2013 by Kien Luu. All Rights Reserved.
         </div>
     </footer>
 </div>
