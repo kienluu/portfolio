@@ -159,6 +159,11 @@ if config.get('storage', 'file_default'):
     DEFAULT_FILE_STORAGE = config.get('storage', 'file_default')
 
 
+CACHES = {
+    'default': dict(config._sections['cache'])
+}
+
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
