@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>
+		</title>
+		<link rel="stylesheet" href="css/base.css" type="text/css" media="all" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="js/swfobject.js"></script>
+		<script type="text/javascript">
+			function getQueryDict() {
+			    // Note this function dont deal with duplicate key names like in django.
+			    var params = location.search.substr(1).split('&');
+			    var queryDict = {};
+			    for (var index in params){
+			        var str = params[index].split('=');
+			        var key = str[0];
+			        var val = decodeURI(str[1]);
+			        queryDict[key] = val;
+			    }
+			    return queryDict;
+			}
+			// Example get queries pastable in modern browser such as chrome: index.html?swfpath=swf/BootMiniGame.swf&height=350&width=350&title=Boot Mini Game
+			var data = getQueryDict();
+			document.title = data.title;
+			swfobject.embedSWF(data.swfpath, "main", data.width, data.height,
+				"11.0.00", "swf/expressInstall.swf");
+		</script>
+	</head>
+	<body>
+		<div id="main">
+		</div>
+	</body>
+</html>
