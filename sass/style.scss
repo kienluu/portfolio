@@ -4,6 +4,7 @@
 @import "partials/_normalize";
 @import "partials/_main";
 @import "partials/_base";
+@import "partials/_arrow";
 @import "susy";
 @import "compass/css3";
 
@@ -293,7 +294,27 @@ $minContentHeight: 300px;
     max-width:  columns-width(7);
     img {
       max-width: 100%;
-      //max-width: percentage(columns-width(9) / columns-width(6));
+      max-width: percentage(columns-width(9) / columns-width(6));
+      height: auto;
+    }
+  }
+
+  a.new-window-link {
+    display: inline-block;
+    width: columns-width(9);
+    color: $colorDarkBlue;
+    .arrow {
+      position: relative;
+      top: -5px;
+      @include css-direction-arrow(
+          $orientation:'left',
+          $length:20px,
+          $arrow-color: $colorDarkBlue);
+      margin: 0 10px;
+    }
+
+    img {
+      max-width: columns-width(7);
       height: auto;
     }
   }

@@ -1,0 +1,56 @@
+/*
+  These are css arrows, for a caret (reverse V) thats for drop down menus etc.
+  Its not like the compass css arrows which was built for tooltip arrows
+
+  Based on source: http://forrst.com/posts/Css_arrows_compass_sass_mixin-48r
+*/
+
+@mixin css-direction-arrow(
+      $orientation: "bottom",
+      $bg-color: transparent, // This may cause positioning(!) problems on ie7 so give it real color
+      $arrow-color: #ccc,
+      $length: 10px,
+      $width: none,
+      $margin: null
+      ) {
+
+  font-size: 0px;
+  line-height: 0%;
+  width: 0px;
+  display: inline-block;
+  @if margin != null {
+    margin: $margin;
+  }
+
+  $length: $length / 2.0;
+  @if $width == none {
+    $width: $length;
+  }
+  @else {
+    $width: $width / 2.0;
+  }
+
+  @if $orientation == "bottom" {
+    border-top: $length solid $arrow-color;
+    border-left: $width solid $bg-color;
+    border-right: $width solid $bg-color;
+  }
+
+  @if $orientation == "top" {
+    border-bottom: $length solid $arrow-color;
+    border-left: $width solid $bg-color;
+    border-right: $width solid $bg-color;
+  }
+
+  @if $orientation == "right" {
+    border-left: $length solid $arrow-color;
+    border-top: $width solid $bg-color;
+    border-bottom: $width solid $bg-color;
+  }
+
+  @if $orientation == "left" {
+    border-right: $length solid $arrow-color;
+    border-top: $width solid $bg-color;
+    border-bottom: $width solid $bg-color;
+  }
+}
