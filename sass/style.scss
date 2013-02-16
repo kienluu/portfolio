@@ -297,15 +297,19 @@ $minContentHeight: 300px;
       max-width: percentage(columns-width(9) / columns-width(6));
       height: auto;
     }
+    a {
+      text-decoration: underline;
+    }
   }
 
   a.new-window-link {
     display: inline-block;
+    text-decoration: none;
     width: columns-width(9);
     color: $colorDarkBlue;
     .arrow {
       position: relative;
-      top: -5px;
+      top: 4px;
       @include css-direction-arrow(
           $orientation:'left',
           $length:20px,
