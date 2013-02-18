@@ -28,16 +28,16 @@ define([
             this.runWhenReady(function() {
                 var itemViewDict = this.topNavView.collectionFindItemViewDictByModelSlug(groupName);
                 // Do not update sidebar or display group description of this menu nav is the current active one.
-                if (this.topNavView.lastActiveView === itemViewDict.view) return;
-
-                this.topNavView.setActiveView(itemViewDict.view);
                 var group = itemViewDict.model;
-                this.prevSidebarView = this.sidebarView;
-                this.sidebarView = new SidebarView({group: group});
-                this.sidebarView.on('selectableitem:selected', this.onSidebarItemSelected, this);
-                // FIXME: jquery empty remove events.  Will this remove Backbone events?
-                this.sideView.setView(this.sidebarView);
-                this.trigger('sidebar:created', this.sidebarView);
+                if (this.topNavView.lastActiveView !== itemViewDict.view){
+                    this.topNavView.setActiveView(itemViewDict.view);
+                    this.prevSidebarView = this.sidebarView;
+                    this.sidebarView = new SidebarView({group: group});
+                    this.sidebarView.on('selectableitem:selected', this.onSidebarItemSelected, this);
+                    // FIXME: jquery empty remove events.  Will this remove Backbone events?
+                    this.sideView.setView(this.sidebarView);
+                    this.trigger('sidebar:created', this.sidebarView);
+                }
 
                 // If this root group url then show the project content
                 if (isOpenProjectCall) return;
