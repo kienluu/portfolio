@@ -12,7 +12,7 @@ define(
         'app/views/TransitionView',
         'app/views/transitionViewTransitions',
         'app/views/TopNavView',
-
+        'app/utilities/simpleImageLoader',
         // No return value modules
         'app/globals'
     ],
@@ -25,6 +25,7 @@ define(
         , TransitionView
         , transitionViewTransition
         , TopNavView
+        , simpleImageLoader
         ) {
 
         var createTopNavView = function(pages, groups) {
@@ -66,6 +67,9 @@ define(
                 var contentView = new TransitionView();
                 contentView.transitionOut = transitionViewTransition.fadeOut;
                 contentView.transitionIn = transitionViewTransition.fadeIn;
+                contentView.on('view:added', function(view){
+                    simpleImageLoader(view.$el, '<img src="images/ajax-loader.gif">', {margin: '0 217px'});
+                }, this);
                 this.$('.content-wrapper').append(contentView.el);
                 var sideView = new TransitionView();
                 sideView.transitionOut = transitionViewTransition.slideUp;
