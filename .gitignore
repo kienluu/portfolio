@@ -2,3 +2,5 @@
 .sass-cache/
 static/
 *.pyc
+webapp/images/sprite1*.png
+webapp/test.html
