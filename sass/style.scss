@@ -34,18 +34,10 @@ $container-style: static;
 
 // One piece theme
 
-$colorLighten: 5%;
-//$colorDarkBlue: lighten(#081640, $colorLighten);
 $colorDarkBlue: #212d69;
-//$colorBlue: lighten(#0f2259, $colorLighten);
 $colorBlue: #003fa3;
-$colorStrongBlue: #1a6dd9; // kuler
-//$colorStrongBlue: #003fa3; lightened kuler
-//$colorStrongBlue: #00c4fb; from one piece site
-//$colorGrayBlue: lighten(#ccd9d4, $colorLighten);
+$colorStrongBlue: #1a6dd9;
 $colorGrayBlue: #ccd9d4;
-//$colorGrayBlue: white;
-//$colorGreen: lighten(#0a4001, $colorLighten);
 $colorLightBrown: #af6434;
 $colorBrown: #653a1d;
 $colorWhiteHintedBrown: #f4eae4;
@@ -63,9 +55,7 @@ $highlightColor: $colorStraw;
 $highlightActiveColor: $colorRed;
 
 $dividerColorA: $colorDarkBlue;
-//$dividerColorA: $colorBrown;
 $dividerColorB: lighten($colorDarkBlue, 55%);
-//$dividerColorB: $colorLightBrown;
 
 
 /* -------------------------------------------------------------------------*/
@@ -100,8 +90,6 @@ a {
 
 .container {
   @include container;
-  //@include susy-grid-background;
-  //background-color: #add8e6;
   min-height: 600px;
 }
 
@@ -115,7 +103,6 @@ a {
 header {
   @include span-columns(12);
   position: relative;
-  //background-color: #90ee90;
 
   .logo {
     float: left;
@@ -338,7 +325,6 @@ $minContentHeight: 300px;
 }
 footer {
   @include span-columns(12);
-  //background-color: #90ee90;
   text-align: center;
   padding: 40px 0;
   font-size: 12px;
