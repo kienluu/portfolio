@@ -7,6 +7,9 @@ css_dir = "webapp/css"
 sass_dir = "sass"
 images_dir = "webapp/images"
 javascripts_dir = "webapp/js"
+sprite_load_path = ['sass/sprites']
+http_images_path = "/images"
+http_generated_images_path = "/images"
 
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed
