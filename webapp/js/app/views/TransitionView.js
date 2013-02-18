@@ -1,5 +1,6 @@
 /*
- These styles must be appended to the page's style:
+ These styles must be appended to the page's style if you use transitions that
+ will overlap at the same time.  You must set computeHeight to true as well:
 
  .transition-view-box {
  position: relative;
@@ -33,6 +34,7 @@ define([
         // Options
         destroyViewOnRemove: true,
         duration: 400,
+        computeHeight: false,
         // Others
         className: 'transition-view-box',
         currentView: null,
@@ -119,6 +121,7 @@ define([
             this.computeAndSetHeight();
         },
         computeAndSetHeight: function() {
+            if (!this.computeHeight) return;
             // FIXME: If img heights are unknown then we need to run this command
             // once all images are loaded on the relavant view.
             // Currently I am making sure the image dimensions are known and set.
