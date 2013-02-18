@@ -8,7 +8,7 @@ define([
         tagName: 'article',
         className: 'group-description-box',
         render: function() {
-            this.$el.html(this.group.get('description'));
+            this.$el.html(_.sprintf('<p>%s</p>', this.group.get('description')));
             this.trigger('rendered', this);
         },
         initialize: function(options) {
