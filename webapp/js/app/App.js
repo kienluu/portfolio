@@ -61,6 +61,7 @@ define(
             return topNavView
         };
 
+
         return Backbone.View.extend({
             el: '#app-body',
             initialize: function() {

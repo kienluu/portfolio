@@ -13,9 +13,6 @@ define([
                 return;
             }
             this.on('fullyready', function() {
-                // TODO: Why does running onReady() Directly gives a context
-                // of the window when inside the onReady function but the context here is ‘this’
-                //onReady();
                 onReady.call(this);
             }, this);
         },

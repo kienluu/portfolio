@@ -1,15 +1,15 @@
 from django.conf.urls import patterns, include, url
-from django.contrib import admin
-from tastypie.api import Api
-from portfolio.pages.api import PageResource
-from portfolio.projects.api import ProjectResource, GroupResource
+# from django.contrib import admin
+# from tastypie.api import Api
+# from portfolio.pages.api import PageResource
+# from portfolio.projects.api import ProjectResource, GroupResource
 
-admin.autodiscover()
+# admin.autodiscover()
 
-api_v1 = Api(api_name='v1')
-api_v1.register(ProjectResource())
-api_v1.register(GroupResource())
-api_v1.register(PageResource())
+# api_v1 = Api(api_name='v1')
+# api_v1.register(ProjectResource())
+# api_v1.register(GroupResource())
+# api_v1.register(PageResource())
 
 urlpatterns = patterns('',
     # Examples:
@@ -18,10 +18,10 @@ urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^grappelli/', include('grappelli.urls')),
+    # url(r'^admin/', include(admin.site.urls)),
+    # url(r'^grappelli/', include('grappelli.urls')),
 
     url(r'^media/', include('blobstore_storage.urls')),
 
-    url(r'^api/', include(api_v1.urls))
+    # url(r'^api/', include(api_v1.urls))
 )

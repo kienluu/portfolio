@@ -52,6 +52,7 @@ require.config({
         handlebars: {
             exports: 'Handlebars'
         }
+//        'app.App': ['backbone.core']
     }
 });
 

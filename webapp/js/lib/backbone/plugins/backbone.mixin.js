@@ -23,3 +23,4 @@ define([
     Backbone.View.extendWithMixin = Backbone.Model.extendWithMixin =
             Backbone.Router.extendWithMixin = Backbone.Collection.extendWithMixin = extendWithMixin;
 });
+
