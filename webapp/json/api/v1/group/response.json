@@ -95,7 +95,7 @@
         "slug": "flash"
     },
     {
-        "description": " Apps I've made for mobile devices.",
+        "description": " Apps I've made for mobile devices.  Please select a project from the side menu for more details.",
         "id": "2",
         "name": "Mobile",
         "projects": [
@@ -136,7 +136,7 @@
         "slug": "mobile"
     },
     {
-        "description": "Projects built with a Django backend.",
+        "description": "Projects built with a Django backend.  Please select a project from the side menu for more details.",
         "id": "3",
         "name": "Django",
         "projects": [
